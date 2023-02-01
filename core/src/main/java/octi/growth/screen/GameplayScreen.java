@@ -1,23 +1,30 @@
-package octi.growth;
+package octi.growth.screen;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-
-import java.util.ArrayList;
-import java.util.List;
+import octi.growth.Growth;
+import octi.growth.input.GlobalKeyboardInput;
+import octi.growth.model.GameMap;
 
 /** First screen of the application. Displayed after the application is created. */
-public class FirstScreen implements Screen {
+public class GameplayScreen extends AbstractScreen {
     OrthographicCamera camera;
     ShapeRenderer shapeRenderer;
     ShapeRenderer debugRenderer;
     SpriteBatch spriteBatch;
-
     GameMap map;
+
+    InputMultiplexer inputMultiplexer;
+
+    public GameplayScreen(Growth game){
+        super(game);
+        inputMultiplexer = new InputMultiplexer();
+        inputMultiplexer.addProcessor(new GlobalKeyboardInput(game));
+    }
 
     @Override
     public void show() {
@@ -32,18 +39,17 @@ public class FirstScreen implements Screen {
         debugRenderer = new ShapeRenderer();
         spriteBatch = new SpriteBatch();
 
-        map = new GameMap();
+        map = new GameMap(game);
 
-        Gdx.input.setInputProcessor(map);
+        inputMultiplexer.addProcessor(map);
+        Gdx.input.setInputProcessor(inputMultiplexer);
 
     }
 
     @Override
     public void render(float delta) {
         // Draw your screen here. "delta" is the time since last render in seconds.
-        Gdx.gl.glClearColor( 0, 0, 0, 1 );
-        Gdx.gl.glClear( GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT );
-
+        super.render(delta);
         map.draw(shapeRenderer, spriteBatch, delta);
         map.update(delta);
     }

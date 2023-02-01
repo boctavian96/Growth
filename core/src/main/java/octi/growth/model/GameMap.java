@@ -1,4 +1,4 @@
-package octi.growth;
+package octi.growth.model;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -8,24 +8,26 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
+import octi.growth.Growth;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 public class GameMap implements InputProcessor {
-
-    boolean debugMode = false;
+    private final Growth game;
     BitmapFont debugFont;
     List<Cell> cells;
+    List<MovementGroup> movementGroups;
     float time = 0;
     float cellTime = 0;
     int fps = 0;
 
-    private Cell selectedCell;
-    private Cell destinationCell;
+    private Cell sourceCell;
+    private Cell targetCell;
 
-    public GameMap(){
+    public GameMap(Growth game){
+        this.game = game;
         Cell redCell = new Cell(new Vector2(25, 100), CellType.MEDIUM_CELL, Team.RED);
         Cell greenCell = new Cell(new Vector2(200, 200), CellType.SMALL_CELL, Team.GREEN);
         Cell yellowCell = new Cell(new Vector2(450, 300), CellType.LARGE_CELL, Team.YELLOW);
@@ -36,6 +38,8 @@ public class GameMap implements InputProcessor {
         cells.add(redCell);
         cells.add(greenCell);
         cells.add(yellowCell);
+
+        movementGroups = new ArrayList<>();
     }
 
     public void draw(ShapeRenderer shapeRenderer, SpriteBatch batch, float dt){
@@ -45,6 +49,7 @@ public class GameMap implements InputProcessor {
         //Draw Cells
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
         cells.forEach(cell -> cell.drawCell(shapeRenderer));
+        movementGroups.forEach(mg -> mg.draw(shapeRenderer));
         shapeRenderer.end();
 
         //Draw Resources.
@@ -53,7 +58,7 @@ public class GameMap implements InputProcessor {
         batch.end();
 
         //Draw Debug
-        if(debugMode) {
+        if(game.isDebugMode()) {
             time += dt;
             shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
             cells.forEach(cell -> cell.drawDebug(shapeRenderer));
@@ -76,10 +81,19 @@ public class GameMap implements InputProcessor {
             cells.forEach(cell -> cell.update());
             cellTime = 0;
         }
+
+        for(MovementGroup mg : movementGroups){
+            mg.update(dt);
+        }
     }
 
-    private void spawnAttack(){
+    private MovementGroup spawnMovementGroup(Cell sourceCell, Cell targetCell){
+        int resources = sourceCell.getResources();
+        sourceCell.setResources(0);
+        sourceCell.getTeam();
 
+        //Create attack group.
+        return new MovementGroup(sourceCell.getTeam(), resources, sourceCell.getPosition(), targetCell);
     }
 
     private void drawPaths(List<Cell> cells, ShapeRenderer sr){
@@ -111,12 +125,6 @@ public class GameMap implements InputProcessor {
 
     @Override
     public boolean keyUp(int keycode) {
-        if(keycode == Input.Keys.Q){
-            Gdx.app.exit();
-        }
-        if(keycode == Input.Keys.D){
-            debugMode = !debugMode;
-        }
         return false;
     }
 
@@ -134,17 +142,20 @@ public class GameMap implements InputProcessor {
             if(cell.collisionRectangle.contains(screenX, mouseY)){
                 if(button == Input.Buttons.LEFT) {
                     Gdx.app.log("Selected Cell", "A cell has been selected");
-                    selectedCell = cell;
+                    sourceCell = cell;
                     return false;
                 }
                 if(button == Input.Buttons.RIGHT){
-                    if(Objects.isNull(selectedCell) || selectedCell.equals(destinationCell)){
-                        destinationCell = null;
+                    if(Objects.isNull(sourceCell) || sourceCell.equals(targetCell)){
+                        targetCell = null;
                         return false;
                     }else{
-                        //Spawn Attack
-                        destinationCell = cell;
-
+                        //Spawn Attack or reinforce.
+                        if(sourceCell.getResources() > 0) {
+                            targetCell = cell;
+                            movementGroups.add(spawnMovementGroup(sourceCell, targetCell));
+                            Gdx.app.log("MOVE", "Spawned movement group");
+                        }
                     }
                 }
                 return false;
