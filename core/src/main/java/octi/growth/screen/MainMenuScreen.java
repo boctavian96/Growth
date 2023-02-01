@@ -11,7 +11,6 @@ import octi.growth.input.ExitEvent;
 
 public class MainMenuScreen extends AbstractScreen {
     private Stage uiStage;
-    private Skin uiSkin;
 
     public MainMenuScreen(Growth game){
         super(game);
@@ -20,7 +19,7 @@ public class MainMenuScreen extends AbstractScreen {
     @Override
     public void show() {
         uiStage = new Stage();
-        uiSkin = new Skin(Gdx.files.internal("ui/uiskin.json"));
+        Skin uiSkin = new Skin(Gdx.files.internal("ui/uiskin.json"));
 
         Table table = new Table();
         table.setFillParent(true);

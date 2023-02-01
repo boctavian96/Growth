@@ -16,9 +16,9 @@ import java.util.Objects;
 
 public class GameMap implements InputProcessor {
     private final Growth game;
-    BitmapFont debugFont;
-    List<Cell> cells;
-    List<MovementGroup> movementGroups;
+    private final BitmapFont debugFont;
+    private final List<Cell> cells;
+    private final List<MovementGroup> movementGroups;
     float time = 0;
     float cellTime = 0;
     int fps = 0;
@@ -78,13 +78,11 @@ public class GameMap implements InputProcessor {
     public void update(float dt){
         cellTime += dt;
         if(cellTime > 1){
-            cells.forEach(cell -> cell.update());
+            cells.forEach(Cell::update);
             cellTime = 0;
         }
 
-        for(MovementGroup mg : movementGroups){
-            mg.update(dt);
-        }
+        movementGroups.forEach(group -> group.update(dt));
     }
 
     private MovementGroup spawnMovementGroup(Cell sourceCell, Cell targetCell){
@@ -102,7 +100,7 @@ public class GameMap implements InputProcessor {
         }
     }
 
-    private void drawDotedLine(ShapeRenderer sr, int dotDistance, Vector2 startPosition, Vector2 destinationPosition){
+    private void drawDotedLine(ShapeRenderer sr, final int dotDistance, Vector2 startPosition, Vector2 destinationPosition){
         sr.begin(ShapeRenderer.ShapeType.Line);
         sr.setColor(Color.WHITE);
         Vector2 start = new Vector2(startPosition);

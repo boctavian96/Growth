@@ -7,7 +7,7 @@ import com.badlogic.gdx.graphics.GL20;
 import octi.growth.Growth;
 
 public abstract class AbstractScreen implements Screen {
-    protected Growth game;
+    protected final Growth game;
 
     public AbstractScreen(Growth game){
         this.game = game;

@@ -6,7 +6,7 @@ import octi.growth.Growth;
 import octi.growth.screen.*;
 
 public class ChangeScreenEvent extends ClickListener {
-    private ScreenType targetScreen;
+    private final ScreenType targetScreen;
     private final Growth game;
 
     public ChangeScreenEvent(Growth game, ScreenType targetScreen){

@@ -1,6 +1,5 @@
 package octi.growth.model;
 
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
@@ -9,23 +8,19 @@ public class MovementGroup {
 
     private boolean isAlive;
     private Team team;
-    private Color color;
     private int strength;
     private Rectangle collisionRectangle;
     private float speed;
     private int damage;
     private Vector2 position;
-    private Vector2 source;
     private Cell target;
 
     public MovementGroup(Team team, int size, Vector2 source, Cell target){
         this.isAlive = true;
         this.team = team;
-        color = team.color;
         this.strength = size;
         this.collisionRectangle = new Rectangle(source.x, source.y, 2, 2);
         this.position = new Vector2(source.x, source.y);
-        this.source = source;
         this.target = target;
         this.speed = 20f;
     }

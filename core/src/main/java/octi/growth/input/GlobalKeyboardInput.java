@@ -23,7 +23,7 @@ public class GlobalKeyboardInput implements InputProcessor {
             Gdx.app.exit();
         }
 
-        if(keycode == Input.Keys.D){
+        if(keycode == Input.Keys.F){
             game.changeDebug();
         }
         return false;

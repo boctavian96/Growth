@@ -1,24 +1,24 @@
 package octi.growth.screen;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputMultiplexer;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.Vector3;
 import octi.growth.Growth;
 import octi.growth.input.GlobalKeyboardInput;
 import octi.growth.model.GameMap;
 
 /** First screen of the application. Displayed after the application is created. */
 public class GameplayScreen extends AbstractScreen {
-    OrthographicCamera camera;
-    ShapeRenderer shapeRenderer;
-    ShapeRenderer debugRenderer;
-    SpriteBatch spriteBatch;
-    GameMap map;
+    private OrthographicCamera camera;
+    private ShapeRenderer shapeRenderer;
+    private SpriteBatch spriteBatch;
+    private GameMap map;
 
-    InputMultiplexer inputMultiplexer;
+    private final InputMultiplexer inputMultiplexer;
 
     public GameplayScreen(Growth game){
         super(game);
@@ -32,12 +32,14 @@ public class GameplayScreen extends AbstractScreen {
         int h = Gdx.graphics.getHeight();
         camera = new OrthographicCamera(w, h);
         camera.position.set(w/2, h/2, 0);
-
+        //camera.position.set(0, 0, 0);
 
         // Prepare your screen here.
         shapeRenderer = new ShapeRenderer();
-        debugRenderer = new ShapeRenderer();
+        //shapeRenderer.setProjectionMatrix(camera.combined);
         spriteBatch = new SpriteBatch();
+        //spriteBatch.setProjectionMatrix(camera.combined);
+
 
         map = new GameMap(game);
 
@@ -52,6 +54,15 @@ public class GameplayScreen extends AbstractScreen {
         super.render(delta);
         map.draw(shapeRenderer, spriteBatch, delta);
         map.update(delta);
+
+        if(Gdx.input.isKeyJustPressed(Input.Keys.E)){
+            camera.position.x += 10;
+        }
+        if(Gdx.input.isKeyJustPressed(Input.Keys.W)){
+            camera.position.y += 10;
+        }
+
+        camera.update();
     }
 
     @Override

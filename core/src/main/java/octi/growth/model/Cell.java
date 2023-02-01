@@ -29,7 +29,7 @@ enum Team{
     CYAN(Color.CYAN),
     ORANGE(Color.ORANGE);
 
-    public Color color;
+    public final Color color;
 
     Team(Color color){
         this.color = color;

@@ -5,7 +5,6 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.utils.Align;
 import octi.growth.Growth;
 import octi.growth.input.ChangeScreenEvent;
 import octi.growth.input.SaveMapEvent;
