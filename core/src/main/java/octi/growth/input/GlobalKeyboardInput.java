@@ -3,17 +3,36 @@ package octi.growth.input;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.graphics.Camera;
 import octi.growth.Growth;
 
 public class GlobalKeyboardInput implements InputProcessor {
     private final Growth game;
+    private final Camera camera;
 
-    public GlobalKeyboardInput(Growth game){
+    public GlobalKeyboardInput(Growth game, Camera camera){
         this.game = game;
+        this.camera = camera;
     }
 
     @Override
     public boolean keyDown(int keycode) {
+        if(keycode == Input.Keys.A){
+            camera.translate(-5, 0, 0);
+        }
+
+        if(keycode == Input.Keys.D){
+            camera.translate(5, 0, 0);
+        }
+
+        if(keycode == Input.Keys.W){
+            camera.translate(0, -5, 0);
+        }
+
+        if(keycode == Input.Keys.S){
+            camera.translate(0, 5, 0);
+        }
+
         return false;
     }
 
@@ -26,6 +45,7 @@ public class GlobalKeyboardInput implements InputProcessor {
         if(keycode == Input.Keys.F){
             game.changeDebug();
         }
+
         return false;
     }
 

@@ -45,6 +45,7 @@ public class Cell {
     public Rectangle collisionRectangle;
     private int size;
     private int resources;
+    private boolean selected;
 
     public Cell(Vector2 position, CellType cellType, Team team){
         this.position = position;
@@ -53,7 +54,7 @@ public class Cell {
         resources = 0;
         this.team = team;
         collisionRectangle = createCollisionRectangle(position, cellType);
-
+        selected = false;
     }
 
     private Rectangle createCollisionRectangle(Vector2 position, CellType cellType){

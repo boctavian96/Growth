@@ -2,9 +2,11 @@ package octi.growth.screen;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.SelectBox;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.utils.Array;
 import octi.growth.Growth;
 import octi.growth.input.ChangeScreenEvent;
 import octi.growth.input.SaveMapEvent;
@@ -25,16 +27,24 @@ public class MapEditorScreen extends AbstractScreen{
         TextButton backButton = new TextButton("Back", uiSkin);
         backButton.addListener(new ChangeScreenEvent(game, ScreenType.MAIN_MENU));
 
-        TextButton largeCellButton = new TextButton("Large Cell", uiSkin);
-        largeCellButton.addListener(new SelectCellTypeEvent());
+        SelectBox cellPicker = new SelectBox(uiSkin);
+        Array<String> items = new Array<>();
+        items.add("Large Cell");
+        items.add("Medium Cell");
+        items.add("Small Cell");
+        cellPicker.setItems(items);
+        cellPicker.addListener(new SelectCellTypeEvent());
 
-        TextButton mediumCellButton = new TextButton("Medium Cell", uiSkin);
-        mediumCellButton.addListener(new SelectCellTypeEvent());
+        SelectBox teamPicker = new SelectBox(uiSkin);
+        Array<String> teams = new Array<>();
+        teams.add("Red");
+        teams.add("Green");
+        teams.add("Yellow");
+        teams.add("Neutral");
+        teamPicker.setItems(teams);
 
-        TextButton smallCellButton = new TextButton("SmallCell", uiSkin);
-        smallCellButton.addListener(new SelectCellTypeEvent());
 
-        TextButton saveButton = new TextButton("Save", uiSkin);
+        TextButton saveButton = new TextButton("Export", uiSkin);
         saveButton.addListener(new SaveMapEvent());
 
         Table table = new Table();
@@ -42,9 +52,8 @@ public class MapEditorScreen extends AbstractScreen{
         table.defaults().width(100).pad(5);
 
         table.add(backButton).expandX().left();
-        table.add(largeCellButton);
-        table.add(mediumCellButton);
-        table.add(smallCellButton);
+        table.add(cellPicker).width(120);
+        table.add(teamPicker).width(120);
         table.add(saveButton).expandX().right();
 
         table.top().left();

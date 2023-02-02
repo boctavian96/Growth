@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.utils.viewport.FitViewport;
 import octi.growth.Growth;
 import octi.growth.input.GlobalKeyboardInput;
 import octi.growth.model.GameMap;
@@ -23,7 +24,6 @@ public class GameplayScreen extends AbstractScreen {
     public GameplayScreen(Growth game){
         super(game);
         inputMultiplexer = new InputMultiplexer();
-        inputMultiplexer.addProcessor(new GlobalKeyboardInput(game));
     }
 
     @Override
@@ -32,37 +32,33 @@ public class GameplayScreen extends AbstractScreen {
         int h = Gdx.graphics.getHeight();
         camera = new OrthographicCamera(w, h);
         camera.position.set(w/2, h/2, 0);
+        camera.update();
+        FitViewport fitViewport = new FitViewport(w, h);
         //camera.position.set(0, 0, 0);
+        inputMultiplexer.addProcessor(new GlobalKeyboardInput(game, camera));
+
 
         // Prepare your screen here.
         shapeRenderer = new ShapeRenderer();
-        //shapeRenderer.setProjectionMatrix(camera.combined);
         spriteBatch = new SpriteBatch();
-        //spriteBatch.setProjectionMatrix(camera.combined);
-
 
         map = new GameMap(game);
-
         inputMultiplexer.addProcessor(map);
         Gdx.input.setInputProcessor(inputMultiplexer);
-
     }
 
     @Override
     public void render(float delta) {
         // Draw your screen here. "delta" is the time since last render in seconds.
         super.render(delta);
+        camera.update();
+
+        shapeRenderer.setProjectionMatrix(camera.combined);
+        spriteBatch.setProjectionMatrix(camera.combined);
+
         map.draw(shapeRenderer, spriteBatch, delta);
         map.update(delta);
 
-        if(Gdx.input.isKeyJustPressed(Input.Keys.E)){
-            camera.position.x += 10;
-        }
-        if(Gdx.input.isKeyJustPressed(Input.Keys.W)){
-            camera.position.y += 10;
-        }
-
-        camera.update();
     }
 
     @Override

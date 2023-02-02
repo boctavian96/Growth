@@ -1,10 +1,11 @@
 d:assets:assets:0:application/unknown:1
+d:maps:maps:0:application/unknown:1
 d:ui:ui:0:application/unknown:1
-t:ui/font-window.fnt:ui/font-window-8d022d1f9663b051667a7a80d9aa2599.fnt:21344:application/unknown:1
-t:ui/font-list.fnt:ui/font-list-128743ba21dda6939c392ae7412ef13d.fnt:21340:application/unknown:1
-t:ui/font.fnt:ui/font-c3ce1f3ac12d278930ecce16c2059535.fnt:21330:application/unknown:1
-t:ui/uiskin.atlas:ui/uiskin-63fc2eb6351ae119fa44a1fc5464925c.atlas:5782:application/unknown:1
-t:ui/font-subtitle.fnt:ui/font-subtitle-c6c32b2e330a62db58e859fa7ae2bfc7.fnt:21348:application/unknown:1
+t:ui/font-window.fnt:ui/font-window-73e4ef96b1243364b96416c980322397.fnt:21146:application/unknown:1
+t:ui/font-list.fnt:ui/font-list-e0653fce5848e92b65f17f06365978dc.fnt:21142:application/unknown:1
+t:ui/font.fnt:ui/font-b6663aba4361ae57913fa39dcb89cb91.fnt:21132:application/unknown:1
+t:ui/uiskin.atlas:ui/uiskin-228c38479421e75a43608fce878f15b3.atlas:5402:application/unknown:1
+t:ui/font-subtitle.fnt:ui/font-subtitle-7a54a36c16a2e92426843c7758eac9b8.fnt:21150:application/unknown:1
 i:ui/uiskin.png:ui/uiskin-22864430510393b731cba00af7c0067b.png:44082:image/png:1
 t:ui/uiskin.json:ui/uiskin-50b4997412ab22133c57a87ae88d03d9.json:16175:application/unknown:1
 t:com/badlogic/gdx/graphics/g3d/particles/particles.fragment.glsl:particles.fragment-b90524761fdf09b0a836056d590c30b8.glsl:820:application/unknown:1
