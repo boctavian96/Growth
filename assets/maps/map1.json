@@ -1,0 +1,109 @@
+{
+cellList: [
+	{
+		type: MEDIUM_CELL
+		team: RED
+		position: {
+			x: 71
+			y: 220
+		}
+		collisionRectangle: {
+			x: 51
+			y: 200
+			width: 40
+			height: 40
+		}
+		size: 25
+	}
+	{
+		type: MEDIUM_CELL
+		team: GREEN
+		position: {
+			x: 566
+			y: 235
+		}
+		collisionRectangle: {
+			x: 546
+			y: 215
+			width: 40
+			height: 40
+		}
+		size: 25
+	}
+	{
+		type: LARGE_CELL
+		team: NEUTRAL
+		position: {
+			x: 322
+			y: 232
+		}
+		collisionRectangle: {
+			x: 292
+			y: 202
+			width: 60
+			height: 60
+		}
+		size: 35
+	}
+	{
+		type: MEDIUM_CELL
+		team: NEUTRAL
+		position: {
+			x: 75
+			y: 382
+		}
+		collisionRectangle: {
+			x: 55
+			y: 362
+			width: 40
+			height: 40
+		}
+		size: 25
+	}
+	{
+		type: MEDIUM_CELL
+		team: NEUTRAL
+		position: {
+			x: 69
+			y: 65
+		}
+		collisionRectangle: {
+			x: 49
+			y: 45
+			width: 40
+			height: 40
+		}
+		size: 25
+	}
+	{
+		type: MEDIUM_CELL
+		team: NEUTRAL
+		position: {
+			x: 567
+			y: 70
+		}
+		collisionRectangle: {
+			x: 547
+			y: 50
+			width: 40
+			height: 40
+		}
+		size: 25
+	}
+	{
+		type: MEDIUM_CELL
+		team: NEUTRAL
+		position: {
+			x: 562
+			y: 383
+		}
+		collisionRectangle: {
+			x: 542
+			y: 363
+			width: 40
+			height: 40
+		}
+		size: 25
+	}
+]
+}

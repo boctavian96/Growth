@@ -3,11 +3,13 @@ package octi.growth.model;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.Json;
 import octi.growth.Growth;
 
 import java.util.ArrayList;
@@ -26,19 +28,18 @@ public class GameMap implements InputProcessor {
     private Cell sourceCell;
     private Cell targetCell;
 
-    public GameMap(Growth game){
-        this.game = game;
-        Cell redCell = new Cell(new Vector2(25, 100), CellType.MEDIUM_CELL, Team.RED);
-        Cell greenCell = new Cell(new Vector2(200, 200), CellType.SMALL_CELL, Team.GREEN);
-        Cell yellowCell = new Cell(new Vector2(450, 300), CellType.LARGE_CELL, Team.YELLOW);
+    public GameMap(Growth game, String mapPath){
+
+        FileHandle fh = Gdx.files.local(mapPath);
+        String jsonString = fh.readString();
+
+        Json json = new Json();
+        MapModel mapModel = json.fromJson(MapModel.class, jsonString);
+        cells = mapModel.getCellList();
 
         debugFont = new BitmapFont();
 
-        cells = new ArrayList<>();
-        cells.add(redCell);
-        cells.add(greenCell);
-        cells.add(yellowCell);
-
+        this.game = game;
         movementGroups = new ArrayList<>();
     }
 
@@ -95,8 +96,10 @@ public class GameMap implements InputProcessor {
     }
 
     private void drawPaths(List<Cell> cells, ShapeRenderer sr){
-        for(int i = 0; i<cells.size()-1; i++){
-            drawDotedLine(sr, 5, cells.get(i).position, cells.get(i+1).position);
+        for(int i = 0; i<cells.size()/2; i++){
+            for(int j = i + 1; j<cells.size(); j++) {
+                drawDotedLine(sr, 5, cells.get(i).position, cells.get(j).position);
+            }
         }
     }
 

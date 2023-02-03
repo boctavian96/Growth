@@ -7,35 +7,6 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
-
-enum CellType{
-    SMALL_CELL(15, 1),
-    MEDIUM_CELL(25, 2),
-    LARGE_CELL(35, 3);
-
-    public final int size;
-    public final int growth;
-
-    CellType(int size, int growth){
-        this.size = size;
-        this.growth = growth;
-    }
-}
-
-enum Team{
-    RED(Color.RED),
-    GREEN(Color.GREEN),
-    YELLOW(Color.YELLOW),
-    CYAN(Color.CYAN),
-    ORANGE(Color.ORANGE);
-
-    public final Color color;
-
-    Team(Color color){
-        this.color = color;
-    }
-}
-
 public class Cell {
     private static final BitmapFont font = new BitmapFont();
 
@@ -46,6 +17,13 @@ public class Cell {
     private int size;
     private int resources;
     private boolean selected;
+
+    /**
+     * To be used only for JSON serialization.
+     */
+    public Cell(){
+
+    }
 
     public Cell(Vector2 position, CellType cellType, Team team){
         this.position = position;
@@ -77,7 +55,7 @@ public class Cell {
                 atMaximumCapacity = resources >= 80;
                 break;
         }
-        if(!atMaximumCapacity) {
+        if(!atMaximumCapacity && !team.equals(Team.NEUTRAL)) {
             this.resources += type.growth;
         }
     }
@@ -85,6 +63,17 @@ public class Cell {
     public void drawCell(ShapeRenderer sr){
         sr.setColor(team.color);
         sr.circle(position.x, position.y, size);
+    }
+
+    /**
+     * Drows the circle at half of alpha. Use only on the map editor.
+     * @param sr
+     */
+    public void drawGhost(ShapeRenderer sr){
+        Color ghostColor = team.color;
+        ghostColor.a = 0.5f;
+        sr.setColor(ghostColor);
+        sr.circle(position.x, position.y, type.size);
     }
 
     public void drawResources(SpriteBatch batch){
@@ -139,6 +128,10 @@ public class Cell {
 
     public void setSize(int size) {
         this.size = size;
+    }
+
+    public void setSize(CellType typeSize){
+        this.size = typeSize.size;
     }
 
     public int getResources() {

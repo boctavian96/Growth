@@ -1,12 +1,10 @@
 package octi.growth.screen;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import octi.growth.Growth;
 import octi.growth.input.GlobalKeyboardInput;
@@ -42,7 +40,7 @@ public class GameplayScreen extends AbstractScreen {
         shapeRenderer = new ShapeRenderer();
         spriteBatch = new SpriteBatch();
 
-        map = new GameMap(game);
+        map = new GameMap(game, "/assets/maps/map1.json");
         inputMultiplexer.addProcessor(map);
         Gdx.input.setInputProcessor(inputMultiplexer);
     }

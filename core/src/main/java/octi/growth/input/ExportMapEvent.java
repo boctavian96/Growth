@@ -4,10 +4,10 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
-public class SelectCellTypeEvent extends ClickListener {
+public class ExportMapEvent extends ClickListener {
     @Override
     public void clicked(InputEvent event, float x, float y) {
-        Gdx.app.log("TODO", "Implement me! SelectCellTypeEvent");
+        Gdx.app.log("TODO", "Implement me! SaveMapEvent");
         super.clicked(event, x, y);
     }
 }
