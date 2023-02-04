@@ -29,6 +29,8 @@ public class GameMap implements InputProcessor {
     private Cell sourceCell;
     private Cell targetCell;
 
+    Team playerTeam;
+
     public GameMap(Growth game, GameplayScreenContext context){
 
         StringBuilder mapPath = new StringBuilder("/assets/maps/");
@@ -37,8 +39,15 @@ public class GameMap implements InputProcessor {
         FileHandle fh = Gdx.files.local(mapPath.toString());
         String jsonString = fh.readString();
 
+        playerTeam = context.getPlayerTeam();
+
         Json json = new Json();
         MapModel mapModel = json.fromJson(MapModel.class, jsonString);
+
+        if(!playerTeam.equals(Team.RED)){
+            mapModel.changePlayerColor(playerTeam);
+        }
+
         cells = mapModel.getCellList();
 
         debugFont = new BitmapFont();
@@ -88,6 +97,11 @@ public class GameMap implements InputProcessor {
         }
 
         movementGroups.forEach(group -> group.update(dt));
+        checkWin();
+    }
+
+    private boolean checkWin(){
+        return false;
     }
 
     private MovementGroup spawnMovementGroup(Cell sourceCell, Cell targetCell){
@@ -145,7 +159,7 @@ public class GameMap implements InputProcessor {
 
         for(Cell cell : cells){
             if(cell.collisionRectangle.contains(screenX, mouseY)){
-                if(button == Input.Buttons.LEFT) {
+                if(button == Input.Buttons.LEFT && cell.getTeam().equals(playerTeam)) {
                     Gdx.app.log("Selected Cell", "A cell has been selected");
                     sourceCell = cell;
                     return false;

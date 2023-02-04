@@ -35,12 +35,15 @@ public class MainMenuScreen extends AbstractScreen {
         TextButton tutorialButton = new TextButton("Tutorial", uiSkin);
         tutorialButton.addListener(new ChangeScreenEvent(game, ScreenType.TUTORIAL));
 
+        TextButton optionsButton = new TextButton("Options", uiSkin);
+
         TextButton exitButton = new TextButton("Exit", uiSkin);
         exitButton.addListener(new ExitEvent());
 
         table.add(playButton).row();
         table.add(mapEditorButton).row();
         table.add(tutorialButton).row();
+        table.add(optionsButton).row();
         table.add(exitButton).row();
 
         uiStage.addActor(table);
