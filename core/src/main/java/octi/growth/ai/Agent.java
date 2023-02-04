@@ -55,7 +55,8 @@ public class Agent {
     }
 
     public void idle(){
-        if(timer > 5) {
+        if(timer > 2) {
+            //Agent never waits...
             log("Im waiting.");
             timer = 0;
         }
@@ -65,6 +66,25 @@ public class Agent {
         if(timer > 2) {
             log("Im reinforcing");
             timer = 0;
+
+            //Select a random cell that agent owns.
+            List<Cell> ownedCells = world.getMapCells().stream().filter(cell -> cell.getTeam().equals(team)).collect(Collectors.toList());
+            if(ownedCells.size() == 1){
+                //Nothing to reinforce...
+                return;
+            }else{
+                //Select random source
+                Random random = new Random();
+                int source = random.nextInt(ownedCells.size());
+                int target = random.nextInt(ownedCells.size());
+
+                if(source == target){
+                    //Failed to reinforce.
+                    return;
+                }
+
+                movementGroups.add(api.spawnMovementGroup(ownedCells.get(source), ownedCells.get(target)));
+            }
         }
     }
 
