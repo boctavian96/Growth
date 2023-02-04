@@ -11,6 +11,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Json;
 import octi.growth.Growth;
+import octi.growth.screen.GameplayScreenContext;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,9 +29,12 @@ public class GameMap implements InputProcessor {
     private Cell sourceCell;
     private Cell targetCell;
 
-    public GameMap(Growth game, String mapPath){
+    public GameMap(Growth game, GameplayScreenContext context){
 
-        FileHandle fh = Gdx.files.local(mapPath);
+        StringBuilder mapPath = new StringBuilder("/assets/maps/");
+        mapPath.append(context.getMapName());
+
+        FileHandle fh = Gdx.files.local(mapPath.toString());
         String jsonString = fh.readString();
 
         Json json = new Json();

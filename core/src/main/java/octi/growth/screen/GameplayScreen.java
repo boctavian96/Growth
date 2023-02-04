@@ -12,6 +12,8 @@ import octi.growth.model.GameMap;
 
 /** First screen of the application. Displayed after the application is created. */
 public class GameplayScreen extends AbstractScreen {
+    private GameplayScreenContext context;
+
     private OrthographicCamera camera;
     private ShapeRenderer shapeRenderer;
     private SpriteBatch spriteBatch;
@@ -19,13 +21,17 @@ public class GameplayScreen extends AbstractScreen {
 
     private final InputMultiplexer inputMultiplexer;
 
-    public GameplayScreen(Growth game){
+    public GameplayScreen(Growth game, GameplayScreenContext context){
         super(game);
+        this.context = context;
         inputMultiplexer = new InputMultiplexer();
     }
 
     @Override
     public void show() {
+        // Prepare your screen here.
+
+        // Prepare Camera.
         int w = Gdx.graphics.getWidth();
         int h = Gdx.graphics.getHeight();
         camera = new OrthographicCamera(w, h);
@@ -34,14 +40,19 @@ public class GameplayScreen extends AbstractScreen {
         FitViewport fitViewport = new FitViewport(w, h);
         inputMultiplexer.addProcessor(new GlobalKeyboardInput(game, camera));
 
-
-        // Prepare your screen here.
+        // Prepare Drawers.
         shapeRenderer = new ShapeRenderer();
         spriteBatch = new SpriteBatch();
 
-        map = new GameMap(game, "/assets/maps/tutorial.json");
+        //Prepare Player.
+
+        //Prepare AI.
+
+        //Prepare Map.
+        map = new GameMap(game, context);
         inputMultiplexer.addProcessor(map);
         Gdx.input.setInputProcessor(inputMultiplexer);
+
     }
 
     @Override

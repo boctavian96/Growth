@@ -8,17 +8,23 @@ import octi.growth.screen.*;
 public class ChangeScreenEvent extends ClickListener {
     private final ScreenType targetScreen;
     private final Growth game;
+    private GameplayScreenContext context;
 
     public ChangeScreenEvent(Growth game, ScreenType targetScreen){
         this.game = game;
         this.targetScreen = targetScreen;
     }
 
+    public ChangeScreenEvent(Growth game, ScreenType targetScreen, GameplayScreenContext context){
+        this(game, targetScreen);
+        this.context = context;
+    }
+
     @Override
     public void clicked(InputEvent event, float x, float y) {
         switch(targetScreen){
             case GAME:
-                game.setScreen(new GameplayScreen(game));
+                game.setScreen(new GameplayScreen(game, context));
                 break;
             case TUTORIAL:
                 game.setScreen(new TutorialScreen(game));

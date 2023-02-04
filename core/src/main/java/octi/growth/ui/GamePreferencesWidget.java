@@ -1,11 +1,20 @@
 package octi.growth.ui;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.Json;
 import octi.growth.Growth;
 import octi.growth.input.ChangeScreenEvent;
+import octi.growth.model.MapModel;
 import octi.growth.screen.GameplayScreenContext;
 import octi.growth.screen.ScreenType;
+import octi.growth.util.CellStatsUtils;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class GamePreferencesWidget extends WidgetGroup {
     private Growth game;
@@ -18,11 +27,23 @@ public class GamePreferencesWidget extends WidgetGroup {
     private TextButton backButton;
     private TextButton playButton;
 
+    private Map<String, String> maps;
+
 
     public GamePreferencesWidget(Skin uiSkin, Growth game){
         //TODO: Idea, add here a window, will make everything visible.
         this.game = game;
         context = new GameplayScreenContext();
+
+        maps = new HashMap<>();
+
+        //Read map names;
+        FileHandle[] listOfFiles = Gdx.files.local("/assets/maps").list();
+        for(int i=0; i<listOfFiles.length; i++){
+            Json json = new Json();
+            MapModel gameMap = json.fromJson(MapModel.class, listOfFiles[i].readString());
+            maps.put(gameMap.getMapName(), listOfFiles[i].name());
+        }
 
         Table table = new Table();
         table.defaults().width(100);
@@ -32,7 +53,7 @@ public class GamePreferencesWidget extends WidgetGroup {
         difficultyBox.setItems("Easy", "Medium", "Hard");
 
         mapNameBox = new SelectBox(uiSkin);
-        mapNameBox.setItems("Tutorial");
+        mapNameBox.setItems(getMapNames(maps));
 
         playerColorBox = new SelectBox(uiSkin);
         playerColorBox.setItems("Red", "Green", "Cyan", "Yellow", "Orange");
@@ -42,6 +63,7 @@ public class GamePreferencesWidget extends WidgetGroup {
         backButton = new TextButton("Back", uiSkin);
         backButton.addListener(new ChangeScreenEvent(game, ScreenType.MAIN_MENU));
         playButton = new TextButton("Start", uiSkin);
+        playButton.addListener(new ChangeScreenEvent(game, ScreenType.GAME, context));
 
         table.add(new Label("Game Preferences", uiSkin)).row();
         table.add(new Label("Select Difficulty:", uiSkin));
@@ -65,9 +87,21 @@ public class GamePreferencesWidget extends WidgetGroup {
     @Override
     public void act(float delta) {
         super.act(delta);
+        updateContext();
     }
 
     public void updateContext(){
-        //context.setMapName();
+        context.setAiDifficulty(difficultyBox.getSelected());
+        context.setMapName(maps.get(mapNameBox.getSelected()));
+        context.setPlayerTeam(CellStatsUtils.getTeam(playerColorBox.getSelected()));
+        context.setAiBattle(aiBrawl.isChecked());
+    }
+
+    private Array<String> getMapNames(Map<String, String> map){
+        Array<String> mapNames = new Array<>();
+        map.forEach((k, v)-> {
+            mapNames.add(k);
+        });
+        return mapNames;
     }
 }
