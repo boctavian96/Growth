@@ -3,6 +3,7 @@ package octi.growth.model;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.ai.btree.BehaviorTree;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -11,6 +12,9 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Json;
 import octi.growth.Growth;
+import octi.growth.ai.Agent;
+import octi.growth.ai.AgentWorld;
+import octi.growth.ai.BehaviorTreeCreator;
 import octi.growth.screen.GameplayScreenContext;
 
 import java.util.ArrayList;
@@ -22,6 +26,8 @@ public class GameMap implements InputProcessor {
     private final BitmapFont debugFont;
     private final List<Cell> cells;
     private final List<MovementGroup> movementGroups;
+    private Agent agent;
+
     float time = 0;
     float cellTime = 0;
     int fps = 0;
@@ -32,6 +38,7 @@ public class GameMap implements InputProcessor {
     Team playerTeam;
 
     public GameMap(Growth game, GameplayScreenContext context){
+        this.game = game;
 
         StringBuilder mapPath = new StringBuilder("/assets/maps/");
         mapPath.append(context.getMapName());
@@ -49,11 +56,12 @@ public class GameMap implements InputProcessor {
         }
 
         cells = mapModel.getCellList();
-
         debugFont = new BitmapFont();
-
-        this.game = game;
         movementGroups = new ArrayList<>();
+
+        BehaviorTree<Agent> behaviorTree = BehaviorTreeCreator.createBehaviorTree("ai/basicAI.tree","Jimmy");
+        AgentWorld world = new AgentWorld(cells, movementGroups);
+        agent = new Agent("Jimmy", behaviorTree, world, this);
     }
 
     public void draw(ShapeRenderer shapeRenderer, SpriteBatch batch, float dt){
@@ -70,6 +78,10 @@ public class GameMap implements InputProcessor {
         batch.begin();
         cells.forEach(cell -> cell.drawResources(batch));
         batch.end();
+
+        agent.update(dt, cells, movementGroups);
+        movementGroups.addAll(agent.fetch());
+
 
         //Draw Debug
         if(game.isDebugMode()) {
@@ -104,13 +116,17 @@ public class GameMap implements InputProcessor {
         return false;
     }
 
-    private MovementGroup spawnMovementGroup(Cell sourceCell, Cell targetCell){
+    public MovementGroup spawnMovementGroup(Cell sourceCell, Cell targetCell){
         int resources = sourceCell.getResources();
         sourceCell.setResources(0);
         sourceCell.getTeam();
 
         //Create attack group.
         return new MovementGroup(sourceCell.getTeam(), resources, sourceCell.getPosition(), targetCell);
+    }
+
+    public void spawnMovementGroupAI(Cell sourceCell, Cell targetCell){
+        spawnMovementGroup(sourceCell, targetCell);
     }
 
     private void drawPaths(List<Cell> cells, ShapeRenderer sr){

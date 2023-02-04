@@ -19,7 +19,7 @@ public class MainMenuScreen extends AbstractScreen {
     @Override
     public void show() {
         uiStage = new Stage();
-        Skin uiSkin = new Skin(Gdx.files.internal("ui/uiskin.json"));
+        Skin uiSkin = loadSkin();
 
         Table table = new Table();
         table.setFillParent(true);

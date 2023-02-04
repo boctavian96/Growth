@@ -1,0 +1,15 @@
+# Basic AI tree
+# Basically this tree selects just a random action. No fancy stuff.
+#
+
+#Alias Definitions
+import idle:"octi.growth.ai.task.IdleTask"
+import reinforce:"octi.growth.ai.task.ReinforceTask"
+import attack:"octi.growth.ai.task.AttackTask"
+
+#Tree definition
+root
+    randomSelector
+        idle
+        reinforce
+        attack
