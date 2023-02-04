@@ -26,7 +26,8 @@ public class MainMenuScreen extends AbstractScreen {
         table.defaults().width(100).pad(5);
 
         TextButton playButton = new TextButton("Play", uiSkin);
-        playButton.addListener(new ChangeScreenEvent(game, ScreenType.GAME));
+        //playButton.addListener(new ChangeScreenEvent(game, ScreenType.GAME));
+        playButton.addListener(new ChangeScreenEvent(game, ScreenType.GAME_SELECTION_SCREEN));
 
         TextButton mapEditorButton = new TextButton("Map Editor", uiSkin);
         mapEditorButton.addListener(new ChangeScreenEvent(game, ScreenType.MAP_EDITOR));

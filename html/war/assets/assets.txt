@@ -1,5 +1,6 @@
 d:assets:assets:0:application/unknown:1
 d:maps:maps:0:application/unknown:1
+t:maps/tutorial.json:maps/tutorial-d8ee39f2d056fc0b302de51f1ad1b75b.json:525:application/unknown:1
 d:ui:ui:0:application/unknown:1
 t:ui/font-window.fnt:ui/font-window-73e4ef96b1243364b96416c980322397.fnt:21146:application/unknown:1
 t:ui/font-list.fnt:ui/font-list-e0653fce5848e92b65f17f06365978dc.fnt:21142:application/unknown:1
@@ -8,6 +9,10 @@ t:ui/uiskin.atlas:ui/uiskin-228c38479421e75a43608fce878f15b3.atlas:5402:applicat
 t:ui/font-subtitle.fnt:ui/font-subtitle-7a54a36c16a2e92426843c7758eac9b8.fnt:21150:application/unknown:1
 i:ui/uiskin.png:ui/uiskin-22864430510393b731cba00af7c0067b.png:44082:image/png:1
 t:ui/uiskin.json:ui/uiskin-50b4997412ab22133c57a87ae88d03d9.json:16175:application/unknown:1
+d:ai:ai:0:application/unknown:1
+b:ai/hardAI.tree:ai/hardAI-d41d8cd98f00b204e9800998ecf8427e.tree:0:application/unknown:1
+b:ai/basicAI.tree:ai/basicAI-d41d8cd98f00b204e9800998ecf8427e.tree:0:application/unknown:1
+b:ai/normalAI.tree:ai/normalAI-d41d8cd98f00b204e9800998ecf8427e.tree:0:application/unknown:1
 t:com/badlogic/gdx/graphics/g3d/particles/particles.fragment.glsl:particles.fragment-b90524761fdf09b0a836056d590c30b8.glsl:820:application/unknown:1
 t:com/badlogic/gdx/graphics/g3d/particles/particles.vertex.glsl:particles.vertex-f25b8b2fae10b9bfa09bfdd484923148.glsl:2886:application/unknown:1
 t:com/badlogic/gdx/graphics/g3d/shaders/default.fragment.glsl:default.fragment-e1c018bd48044c8b67c7bbc53145e540.glsl:5874:application/unknown:1

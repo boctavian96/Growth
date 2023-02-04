@@ -32,7 +32,6 @@ public class GameplayScreen extends AbstractScreen {
         camera.position.set(w/2, h/2, 0);
         camera.update();
         FitViewport fitViewport = new FitViewport(w, h);
-        //camera.position.set(0, 0, 0);
         inputMultiplexer.addProcessor(new GlobalKeyboardInput(game, camera));
 
 
@@ -40,7 +39,7 @@ public class GameplayScreen extends AbstractScreen {
         shapeRenderer = new ShapeRenderer();
         spriteBatch = new SpriteBatch();
 
-        map = new GameMap(game, "/assets/maps/map1.json");
+        map = new GameMap(game, "/assets/maps/tutorial.json");
         inputMultiplexer.addProcessor(map);
         Gdx.input.setInputProcessor(inputMultiplexer);
     }

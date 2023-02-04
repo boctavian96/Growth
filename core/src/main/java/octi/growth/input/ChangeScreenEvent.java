@@ -29,6 +29,9 @@ public class ChangeScreenEvent extends ClickListener {
             case MAIN_MENU:
                 game.setScreen(new MainMenuScreen(game));
                 break;
+            case GAME_SELECTION_SCREEN:
+                game.setScreen(new GameSelectionScreen(game));
+                break;
             default:
                 throw new IllegalArgumentException("Screen type doesnt exist, please check ScreenTypes.java");
         }
