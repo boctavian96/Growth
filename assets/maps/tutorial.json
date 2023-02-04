@@ -1,0 +1,50 @@
+{
+mapName: Tutorial
+cellList: [
+	{
+		type: LARGE_CELL
+		team: RED
+		position: {
+			x: 59
+			y: 235
+		}
+		collisionRectangle: {
+			x: 29
+			y: 205
+			width: 60
+			height: 60
+		}
+		size: 35
+	}
+	{
+		type: MEDIUM_CELL
+		team: NEUTRAL
+		position: {
+			x: 307
+			y: 241
+		}
+		collisionRectangle: {
+			x: 287
+			y: 221
+			width: 40
+			height: 40
+		}
+		size: 25
+	}
+	{
+		type: SMALL_CELL
+		team: NEUTRAL
+		position: {
+			x: 514
+			y: 238
+		}
+		collisionRectangle: {
+			x: 504
+			y: 228
+			width: 20
+			height: 20
+		}
+		size: 15
+	}
+]
+}

@@ -10,17 +10,12 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.SelectBox;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
-import com.badlogic.gdx.utils.JsonWriter;
 import octi.growth.Growth;
 import octi.growth.input.ChangeScreenEvent;
-import octi.growth.input.ExportMapEvent;
 import octi.growth.input.SelectionEvent;
 import octi.growth.model.Cell;
 import octi.growth.model.CellType;
@@ -29,6 +24,7 @@ import octi.growth.model.Team;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.stream.Collectors;
 
 public class MapEditorScreen extends AbstractScreen implements InputProcessor {
@@ -39,6 +35,7 @@ public class MapEditorScreen extends AbstractScreen implements InputProcessor {
 
     private SelectBox cellPicker;
     private SelectBox teamPicker;
+    private Window window;
 
     private ArrayList<Cell> generatedCells;
 
@@ -88,27 +85,64 @@ public class MapEditorScreen extends AbstractScreen implements InputProcessor {
         saveButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
+                window.setVisible(true);
+            }
+        });
+
+        window = new Window("Export", uiSkin);
+
+        TextField mapName = new TextField("Map Name", uiSkin);
+
+        window.add(mapName).center().expandX();
+        window.row();
+
+        TextButton windowCancelButton = new TextButton("Cancel", uiSkin);
+        windowCancelButton.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                window.setVisible(false);
+            }
+        });
+
+        TextButton windowExportButton = new TextButton("Export", uiSkin);
+        windowExportButton.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                window.setVisible(false);
                 Gdx.app.log("EXPORT", "Export clicked");
                 MapModel mapModel = new MapModel(generatedCells);
 
                 Json json = new Json();
+                mapModel.setMapName(mapName.getText());
                 String jsonMap = json.toJson(mapModel);
 
                 Gdx.app.log("EXPORT", json.prettyPrint(jsonMap));
 
-                FileHandle fh = Gdx.files.local("/assets/maps/map1.json");
+                String mapNameStr = mapName.getText();
+                mapNameStr = mapNameStr.toLowerCase(Locale.ROOT);
+                mapNameStr = mapNameStr.replace(" ", "_");
+
+                FileHandle fh = Gdx.files.local(String.format("/assets/maps/%s.json", mapNameStr));
                 fh.writeString(json.prettyPrint(jsonMap), false);
             }
         });
 
+        window.add(windowCancelButton).expandX().bottom().left();
+        window.add(windowExportButton).expandX().bottom().right();
+        window.add().expandX().bottom().right();
+        window.setVisible(false);
+        window.pack();
+
         Table table = new Table();
         table.setFillParent(true);
-        table.defaults().width(100).pad(5);
+        table.defaults().width(100).pad(5);;
 
         table.add(backButton).expandX().left();
         table.add(cellPicker).width(120);
         table.add(teamPicker).width(120);
         table.add(saveButton).expandX().right();
+        table.row().row();
+        table.add(window).center().width(200).height(200);
 
         table.top().left();
 
@@ -136,19 +170,22 @@ public class MapEditorScreen extends AbstractScreen implements InputProcessor {
     public void render(float delta) {
         super.render(delta);
         update();
-        uiStage.act(delta);
-        uiStage.draw();
 
         Gdx.gl.glEnable(GL20.GL_BLEND);
         Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-        ghostCell.drawGhost(shapeRenderer);
+        if(!window.isVisible()) {
+            ghostCell.drawGhost(shapeRenderer);
+        }
         shapeRenderer.end();
 
         Gdx.gl.glDisable(GL20.GL_BLEND);
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
         generatedCells.forEach(c -> c.drawCell(shapeRenderer));
         shapeRenderer.end();
+
+        uiStage.act(delta);
+        uiStage.draw();
     }
 
     private Team getTeam(String color){
@@ -202,7 +239,7 @@ public class MapEditorScreen extends AbstractScreen implements InputProcessor {
         int revertedY = Gdx.graphics.getHeight() - screenY;
         Vector2 touchPoint = new Vector2(screenX, revertedY);
 
-        if(revertedY < Gdx.graphics.getHeight() * 0.85) {
+        if(revertedY < Gdx.graphics.getHeight() * 0.85 && !window.isVisible()) {
             if (button == Input.Buttons.LEFT) {
                 //Place a Cell.
                 Cell newCell = new Cell(touchPoint, ghostCell.getType(), ghostCell.getTeam());
