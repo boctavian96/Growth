@@ -2,11 +2,15 @@ package octi.growth.model;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class MapModel {
     private String mapName;
     private List<Cell> cellList;
 
+    /**
+     * Use only for JSON serialization.
+     */
     public MapModel(){
 
     }
@@ -36,8 +40,13 @@ public class MapModel {
         boolean hasAIDesiredColor = cell.isPresent();
 
         if(hasAIDesiredColor){
-            //Change AI Color to a random color.
-            throw new IllegalArgumentException("AI has this Team! Please implement a team changer :D");
+            //Change AI Color to the player's color.
+            List<Cell> aiColor = cellList.stream().filter(c -> c.getTeam().equals(team)).collect(Collectors.toList());
+            List<Cell> playerColor = cellList.stream().filter(c -> c.getTeam().equals(Team.RED)).collect(Collectors.toList());
+
+            aiColor.forEach(c -> c.setTeam(Team.RED));
+            playerColor.forEach(c -> c.setTeam(team));
+            return;
         }
 
         //Change player color to the desired color.

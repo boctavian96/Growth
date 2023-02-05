@@ -19,7 +19,7 @@ public class Agent {
     private float timer;
 
     //Hardcode for testing purpose;
-    private Team team = Team.GREEN;
+    private Team team;
 
     //Can this be remade???
     private GameMap api;
@@ -27,10 +27,10 @@ public class Agent {
     List<MovementGroup> movementGroups;
 
     public Agent(String name){
-        this(name, null, null, null);
+        this(name, null, null, null, null);
     }
 
-    public Agent(String name, BehaviorTree<Agent> behaviorTree, AgentWorld world, GameMap map){
+    public Agent(String name, BehaviorTree<Agent> behaviorTree, AgentWorld world, GameMap map, Team agentTeam){
         this.name = name;
         this.behaviorTree = behaviorTree;
         if(Objects.nonNull(behaviorTree)){
@@ -39,6 +39,7 @@ public class Agent {
         this.world = world;
         this.api = map;
         movementGroups = new ArrayList<>();
+        this.team = agentTeam;
     }
 
     public void update(float delta, List<Cell> mapCells, List<MovementGroup> movementGroups){

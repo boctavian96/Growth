@@ -17,16 +17,14 @@ import octi.growth.ai.AgentWorld;
 import octi.growth.ai.BehaviorTreeCreator;
 import octi.growth.screen.GameplayScreenContext;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public class GameMap implements InputProcessor {
     private final Growth game;
     private final BitmapFont debugFont;
     private final List<Cell> cells;
     private final List<MovementGroup> movementGroups;
-    private Agent agent;
+    private List<Agent> agents;
 
     float time = 0;
     float cellTime = 0;
@@ -59,9 +57,24 @@ public class GameMap implements InputProcessor {
         debugFont = new BitmapFont();
         movementGroups = new ArrayList<>();
 
-        BehaviorTree<Agent> behaviorTree = BehaviorTreeCreator.createBehaviorTree("ai/basicAI.tree","Jimmy");
-        AgentWorld world = new AgentWorld(cells, movementGroups);
-        agent = new Agent("Jimmy", behaviorTree, world, this);
+        Set<Team> availableTeams = new HashSet<>();
+
+        if(context.isAiBattle()){
+            //All AI on the map.
+            for(Cell c : cells){
+                if(!c.getTeam().equals(Team.NEUTRAL)){
+                    availableTeams.add(c.getTeam());
+                }
+            }
+        }else{
+            for(Cell c : cells){
+                if(!c.getTeam().equals(Team.NEUTRAL) && !c.getTeam().equals(playerTeam)){
+                    availableTeams.add(c.getTeam());
+                }
+            }
+        }
+
+        agents = createAgents(availableTeams);
     }
 
     public void draw(ShapeRenderer shapeRenderer, SpriteBatch batch, float dt){
@@ -79,9 +92,8 @@ public class GameMap implements InputProcessor {
         cells.forEach(cell -> cell.drawResources(batch));
         batch.end();
 
-        agent.update(dt, cells, movementGroups);
-        movementGroups.addAll(agent.fetch());
-
+        agents.forEach(a -> a.update(dt, cells, movementGroups));
+        agents.forEach(a -> movementGroups.addAll(a.fetch()));
 
         //Draw Debug
         if(game.isDebugMode()) {
@@ -151,6 +163,17 @@ public class GameMap implements InputProcessor {
         }
 
         sr.end();
+    }
+
+    public List<Agent> createAgents(Set<Team> availableTeams){
+        List<Agent> agents = new ArrayList<>();
+        for(Team t : availableTeams){
+            String agentName = "Agent " + Math.random();
+            BehaviorTree<Agent> behaviorTree = BehaviorTreeCreator.createBehaviorTree("ai/basicAI.tree", agentName);
+            AgentWorld world = new AgentWorld(cells, movementGroups);
+            agents.add(new Agent(agentName, behaviorTree, world, this, t));
+        }
+        return agents;
     }
 
     @Override
