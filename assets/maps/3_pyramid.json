@@ -1,0 +1,155 @@
+{
+mapName: Pyramid
+cellList: [
+	{
+		type: LARGE_CELL
+		team: RED
+		position: {
+			x: 156
+			y: 108
+		}
+		collisionRectangle: {
+			x: 126
+			y: 78
+			width: 60
+			height: 60
+		}
+		size: 35
+	}
+	{
+		type: LARGE_CELL
+		team: GREEN
+		position: {
+			x: 645
+			y: 102
+		}
+		collisionRectangle: {
+			x: 615
+			y: 72
+			width: 60
+			height: 60
+		}
+		size: 35
+	}
+	{
+		type: LARGE_CELL
+		team: CYAN
+		position: {
+			x: 403
+			y: 502
+		}
+		collisionRectangle: {
+			x: 373
+			y: 472
+			width: 60
+			height: 60
+		}
+		size: 35
+	}
+	{
+		type: MEDIUM_CELL
+		team: NEUTRAL
+		position: {
+			x: 322
+			y: 384
+		}
+		collisionRectangle: {
+			x: 302
+			y: 364
+			width: 40
+			height: 40
+		}
+		size: 25
+	}
+	{
+		type: MEDIUM_CELL
+		team: NEUTRAL
+		position: {
+			x: 587
+			y: 209
+		}
+		collisionRectangle: {
+			x: 567
+			y: 189
+			width: 40
+			height: 40
+		}
+		size: 25
+	}
+	{
+		type: MEDIUM_CELL
+		team: NEUTRAL
+		position: {
+			x: 290
+			y: 100
+		}
+		collisionRectangle: {
+			x: 270
+			y: 80
+			width: 40
+			height: 40
+		}
+		size: 25
+	}
+	{
+		type: SMALL_CELL
+		team: NEUTRAL
+		position: {
+			x: 451
+			y: 193
+		}
+		collisionRectangle: {
+			x: 441
+			y: 183
+			width: 20
+			height: 20
+		}
+		size: 15
+	}
+	{
+		type: SMALL_CELL
+		team: NEUTRAL
+		position: {
+			x: 451
+			y: 270
+		}
+		collisionRectangle: {
+			x: 441
+			y: 260
+			width: 20
+			height: 20
+		}
+		size: 15
+	}
+	{
+		type: SMALL_CELL
+		team: NEUTRAL
+		position: {
+			x: 375
+			y: 272
+		}
+		collisionRectangle: {
+			x: 365
+			y: 262
+			width: 20
+			height: 20
+		}
+		size: 15
+	}
+	{
+		type: SMALL_CELL
+		team: NEUTRAL
+		position: {
+			x: 373
+			y: 194
+		}
+		collisionRectangle: {
+			x: 363
+			y: 184
+			width: 20
+			height: 20
+		}
+		size: 15
+	}
+]
+}

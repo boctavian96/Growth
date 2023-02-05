@@ -93,32 +93,27 @@ public class Agent {
         }
     }
 
-    public void attack(){
+    public void attack(Cell source, Cell target){
         if(timer > 2) {
             log("Im attacking");
             timer = 0;
 
-            Random random = new Random();
-
-            //Select a random cell that agent owns.
-            List<Cell> ownedCells = world.getMapCells().stream().filter(cell -> cell.getTeam().equals(team)).collect(Collectors.toList());
-            int source = 0;
-            if(ownedCells.size() > 2){
-                source = random.nextInt(ownedCells.size());
-            }
-
-            //Select a random cell that he dont owns.
-            List<Cell> randomCells = world.getMapCells().stream().filter(cell -> !cell.getTeam().equals(team)).collect(Collectors.toList());
-            int target = random.nextInt(randomCells.size());
-
             //Spawn a attack to a random cell that he dont owns.
-            MovementGroup mg = api.spawnMovementGroup(ownedCells.get(source), randomCells.get(target));
+            MovementGroup mg = api.spawnMovementGroup(source, target);
             movementGroups.add(mg);
         }
     }
 
     private boolean checkAlive(){
         return world.getMapCells().stream().anyMatch(cell -> cell.getTeam().equals(team));
+    }
+
+    public AgentWorld getWorld(){
+        return this.world;
+    }
+
+    public Team getTeam(){
+        return this.team;
     }
 
     public void log(String msg){
