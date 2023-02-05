@@ -13,7 +13,7 @@ public class Growth extends Game {
 
     @Override
     public void create() {
-        this.sound = Gdx.audio.newSound(Gdx.files.internal("assets/sounds/BGmusic.mp3"));
+        this.sound = Gdx.audio.newSound(Gdx.files.internal("sounds/BGmusic.mp3"));
         this.id = sound.play(1.0f); // play new sound and keep handle for further manipulation
         sound.setLooping( id, true);
         setScreen(new MainMenuScreen(this));

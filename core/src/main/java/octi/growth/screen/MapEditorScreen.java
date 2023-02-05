@@ -14,6 +14,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
+import com.badlogic.gdx.utils.JsonWriter;
 import octi.growth.Growth;
 import octi.growth.input.ChangeScreenEvent;
 import octi.growth.input.SelectionEvent;
@@ -122,7 +123,8 @@ public class MapEditorScreen extends AbstractScreen implements InputProcessor {
                 mapNameStr = mapNameStr.toLowerCase(Locale.ROOT);
                 mapNameStr = mapNameStr.replace(" ", "_");
 
-                FileHandle fh = Gdx.files.local(String.format("/assets/maps/%s.json", mapNameStr));
+                FileHandle fh = Gdx.files.local("assets/maps/" + mapNameStr + ".json");
+                json.setOutputType(JsonWriter.OutputType.json);
                 fh.writeString(json.prettyPrint(jsonMap), false);
             }
         });

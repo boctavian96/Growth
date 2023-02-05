@@ -44,10 +44,6 @@ public class GameplayScreen extends AbstractScreen {
         shapeRenderer = new ShapeRenderer();
         spriteBatch = new SpriteBatch();
 
-        //Prepare Player.
-
-        //Prepare AI.
-
         //Prepare Map.
         map = new GameMap(game, context);
         inputMultiplexer.addProcessor(map);

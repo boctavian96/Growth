@@ -19,7 +19,7 @@ public class MovementGroup {
     private int damage;
     private Vector2 position;
     private Cell target;
-    Sound sound = Gdx.audio.newSound(Gdx.files.internal("assets/sounds/lose.mp3"));
+    Sound sound = Gdx.audio.newSound(Gdx.files.internal("sounds/lose.mp3"));
 
 
     public MovementGroup(Team team, int size, Vector2 source, Cell target){

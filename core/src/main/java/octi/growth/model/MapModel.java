@@ -1,12 +1,13 @@
 package octi.growth.model;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class MapModel {
     private String mapName;
-    private List<Cell> cellList;
+    private ArrayList<Cell> cellList;
 
     /**
      * Use only for JSON serialization.
@@ -15,7 +16,7 @@ public class MapModel {
 
     }
 
-    public MapModel(List<Cell> cellList){
+    public MapModel(ArrayList<Cell> cellList){
         this.cellList = cellList;
     }
 
@@ -31,7 +32,7 @@ public class MapModel {
         return cellList;
     }
 
-    public void setCellList(List<Cell> cellList) {
+    public void setCellList(ArrayList<Cell> cellList) {
         this.cellList = cellList;
     }
 

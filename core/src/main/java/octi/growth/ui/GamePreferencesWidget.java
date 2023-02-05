@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
+import com.badlogic.gdx.utils.JsonWriter;
 import octi.growth.Growth;
 import octi.growth.input.ChangeScreenEvent;
 import octi.growth.model.MapModel;
@@ -38,12 +39,14 @@ public class GamePreferencesWidget extends WidgetGroup {
         maps = new HashMap<>();
 
         //Read map names;
-        FileHandle[] listOfFiles = Gdx.files.local("/assets/maps").list();
-        for(int i=0; i<listOfFiles.length; i++){
-            Json json = new Json();
-            MapModel gameMap = json.fromJson(MapModel.class, listOfFiles[i].readString());
-            maps.put(gameMap.getMapName(), listOfFiles[i].name());
-        }
+        FileHandle[] listOfFiles = Gdx.files.internal("maps/").list();
+            for(int i=0; i<listOfFiles.length; i++){
+                Json json = new Json();
+                json.setOutputType(JsonWriter.OutputType.json);
+                MapModel gameMap = json.fromJson(MapModel.class, listOfFiles[i].readString());
+                maps.put(gameMap.getMapName(), listOfFiles[i].name());
+            }
+
 
         Table table = new Table();
         table.defaults().width(100);

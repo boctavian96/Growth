@@ -38,10 +38,10 @@ public class GameMap implements InputProcessor {
     public GameMap(Growth game, GameplayScreenContext context){
         this.game = game;
 
-        StringBuilder mapPath = new StringBuilder("/assets/maps/");
+        StringBuilder mapPath = new StringBuilder("maps/");
         mapPath.append(context.getMapName());
 
-        FileHandle fh = Gdx.files.local(mapPath.toString());
+        FileHandle fh = Gdx.files.internal(mapPath.toString());
         String jsonString = fh.readString();
 
         playerTeam = context.getPlayerTeam();
