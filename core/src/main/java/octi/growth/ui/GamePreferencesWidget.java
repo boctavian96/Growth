@@ -40,6 +40,9 @@ public class GamePreferencesWidget extends WidgetGroup {
 
         //Read map names;
         FileHandle[] listOfFiles = Gdx.files.internal("maps/").list();
+        if(listOfFiles.length == 0){
+            listOfFiles = Gdx.files.internal("assets/maps/").list();
+        }
             for(int i=0; i<listOfFiles.length; i++){
                 Json json = new Json();
                 json.setOutputType(JsonWriter.OutputType.json);
