@@ -1,0 +1,145 @@
+{
+"mapName": "The Line",
+"cellList": [
+	{
+		"type": "LARGE_CELL",
+		"team": "RED",
+		"position": {
+			"x": 97,
+			"y": 279
+		},
+		"collisionCircle": {
+			"x": 97,
+			"y": 279,
+			"radius": 35
+		},
+		"size": 35
+	},
+	{
+		"type": "LARGE_CELL",
+		"team": "CYAN",
+		"position": {
+			"x": 711,
+			"y": 279
+		},
+		"collisionCircle": {
+			"x": 711,
+			"y": 279,
+			"radius": 35
+		},
+		"size": 35
+	},
+	{
+		"type": "SMALL_CELL",
+		"team": "NEUTRAL",
+		"position": {
+			"x": 200,
+			"y": 280
+		},
+		"collisionCircle": {
+			"x": 200,
+			"y": 280,
+			"radius": 15
+		},
+		"size": 15
+	},
+	{
+		"type": "SMALL_CELL",
+		"team": "NEUTRAL",
+		"position": {
+			"x": 289,
+			"y": 281
+		},
+		"collisionCircle": {
+			"x": 289,
+			"y": 281,
+			"radius": 15
+		},
+		"size": 15
+	},
+	{
+		"type": "SMALL_CELL",
+		"team": "NEUTRAL",
+		"position": {
+			"x": 631,
+			"y": 282
+		},
+		"collisionCircle": {
+			"x": 631,
+			"y": 282,
+			"radius": 15
+		},
+		"size": 15
+	},
+	{
+		"type": "SMALL_CELL",
+		"team": "NEUTRAL",
+		"position": {
+			"x": 546,
+			"y": 282
+		},
+		"collisionCircle": {
+			"x": 546,
+			"y": 282,
+			"radius": 15
+		},
+		"size": 15
+	},
+	{
+		"type": "SMALL_CELL",
+		"team": "NEUTRAL",
+		"position": {
+			"x": 454,
+			"y": 228
+		},
+		"collisionCircle": {
+			"x": 454,
+			"y": 228,
+			"radius": 15
+		},
+		"size": 15
+	},
+	{
+		"type": "SMALL_CELL",
+		"team": "NEUTRAL",
+		"position": {
+			"x": 455,
+			"y": 323
+		},
+		"collisionCircle": {
+			"x": 455,
+			"y": 323,
+			"radius": 15
+		},
+		"size": 15
+	},
+	{
+		"type": "SMALL_CELL",
+		"team": "NEUTRAL",
+		"position": {
+			"x": 375,
+			"y": 324
+		},
+		"collisionCircle": {
+			"x": 375,
+			"y": 324,
+			"radius": 15
+		},
+		"size": 15
+	},
+	{
+		"type": "SMALL_CELL",
+		"team": "NEUTRAL",
+		"position": {
+			"x": 372,
+			"y": 226
+		},
+		"collisionCircle": {
+			"x": 372,
+			"y": 226,
+			"radius": 15
+		},
+		"size": 15
+	}
+]
+}

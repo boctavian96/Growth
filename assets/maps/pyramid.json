@@ -1,0 +1,131 @@
+{
+"mapName": "Pyramid",
+"cellList": [
+	{
+		"type": "LARGE_CELL",
+		"team": "RED",
+		"position": {
+			"x": 135,
+			"y": 124
+		},
+		"collisionCircle": {
+			"x": 135,
+			"y": 124,
+			"radius": 35
+		},
+		"size": 35
+	},
+	{
+		"type": "LARGE_CELL",
+		"team": "GREEN",
+		"position": {
+			"x": 391,
+			"y": 473
+		},
+		"collisionCircle": {
+			"x": 391,
+			"y": 473,
+			"radius": 35
+		},
+		"size": 35
+	},
+	{
+		"type": "LARGE_CELL",
+		"team": "YELLOW",
+		"position": {
+			"x": 630,
+			"y": 111
+		},
+		"collisionCircle": {
+			"x": 630,
+			"y": 111,
+			"radius": 35
+		},
+		"size": 35
+	},
+	{
+		"type": "MEDIUM_CELL",
+		"team": "NEUTRAL",
+		"position": {
+			"x": 572,
+			"y": 217
+		},
+		"collisionCircle": {
+			"x": 572,
+			"y": 217,
+			"radius": 25
+		},
+		"size": 25
+	},
+	{
+		"type": "MEDIUM_CELL",
+		"team": "NEUTRAL",
+		"position": {
+			"x": 310,
+			"y": 391
+		},
+		"collisionCircle": {
+			"x": 310,
+			"y": 391,
+			"radius": 25
+		},
+		"size": 25
+	},
+	{
+		"type": "MEDIUM_CELL",
+		"team": "NEUTRAL",
+		"position": {
+			"x": 239,
+			"y": 114
+		},
+		"collisionCircle": {
+			"x": 239,
+			"y": 114,
+			"radius": 25
+		},
+		"size": 25
+	},
+	{
+		"type": "SMALL_CELL",
+		"team": "NEUTRAL",
+		"position": {
+			"x": 448,
+			"y": 193
+		},
+		"collisionCircle": {
+			"x": 448,
+			"y": 193,
+			"radius": 15
+		},
+		"size": 15
+	},
+	{
+		"type": "SMALL_CELL",
+		"team": "NEUTRAL",
+		"position": {
+			"x": 344,
+			"y": 195
+		},
+		"collisionCircle": {
+			"x": 344,
+			"y": 195,
+			"radius": 15
+		},
+		"size": 15
+	},
+	{
+		"type": "SMALL_CELL",
+		"team": "NEUTRAL",
+		"position": {
+			"x": 398,
+			"y": 277
+		},
+		"collisionCircle": {
+			"x": 398,
+			"y": 277,
+			"radius": 15
+		},
+		"size": 15
+	}
+]
+}

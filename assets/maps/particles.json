@@ -1,0 +1,551 @@
+{
+"mapName": "Particles",
+"cellList": [
+	{
+		"type": "SMALL_CELL",
+		"team": "RED",
+		"position": {
+			"x": 81,
+			"y": 493
+		},
+		"collisionCircle": {
+			"x": 81,
+			"y": 493,
+			"radius": 15
+		},
+		"size": 15
+	},
+	{
+		"type": "SMALL_CELL",
+		"team": "RED",
+		"position": {
+			"x": 738,
+			"y": 470
+		},
+		"collisionCircle": {
+			"x": 738,
+			"y": 470,
+			"radius": 15
+		},
+		"size": 15
+	},
+	{
+		"type": "SMALL_CELL",
+		"team": "RED",
+		"position": {
+			"x": 733,
+			"y": 181
+		},
+		"collisionCircle": {
+			"x": 733,
+			"y": 181,
+			"radius": 15
+		},
+		"size": 15
+	},
+	{
+		"type": "SMALL_CELL",
+		"team": "RED",
+		"position": {
+			"x": 653,
+			"y": 310
+		},
+		"collisionCircle": {
+			"x": 653,
+			"y": 310,
+			"radius": 15
+		},
+		"size": 15
+	},
+	{
+		"type": "SMALL_CELL",
+		"team": "RED",
+		"position": {
+			"x": 325,
+			"y": 482
+		},
+		"collisionCircle": {
+			"x": 325,
+			"y": 482,
+			"radius": 15
+		},
+		"size": 15
+	},
+	{
+		"type": "SMALL_CELL",
+		"team": "RED",
+		"position": {
+			"x": 142,
+			"y": 284
+		},
+		"collisionCircle": {
+			"x": 142,
+			"y": 284,
+			"radius": 15
+		},
+		"size": 15
+	},
+	{
+		"type": "SMALL_CELL",
+		"team": "RED",
+		"position": {
+			"x": 240,
+			"y": 102
+		},
+		"collisionCircle": {
+			"x": 240,
+			"y": 102,
+			"radius": 15
+		},
+		"size": 15
+	},
+	{
+		"type": "SMALL_CELL",
+		"team": "CYAN",
+		"position": {
+			"x": 452,
+			"y": 306
+		},
+		"collisionCircle": {
+			"x": 452,
+			"y": 306,
+			"radius": 15
+		},
+		"size": 15
+	},
+	{
+		"type": "SMALL_CELL",
+		"team": "CYAN",
+		"position": {
+			"x": 479,
+			"y": 54
+		},
+		"collisionCircle": {
+			"x": 479,
+			"y": 54,
+			"radius": 15
+		},
+		"size": 15
+	},
+	{
+		"type": "SMALL_CELL",
+		"team": "CYAN",
+		"position": {
+			"x": 697,
+			"y": 42
+		},
+		"collisionCircle": {
+			"x": 697,
+			"y": 42,
+			"radius": 15
+		},
+		"size": 15
+	},
+	{
+		"type": "SMALL_CELL",
+		"team": "CYAN",
+		"position": {
+			"x": 764,
+			"y": 320
+		},
+		"collisionCircle": {
+			"x": 764,
+			"y": 320,
+			"radius": 15
+		},
+		"size": 15
+	},
+	{
+		"type": "SMALL_CELL",
+		"team": "CYAN",
+		"position": {
+			"x": 542,
+			"y": 478
+		},
+		"collisionCircle": {
+			"x": 542,
+			"y": 478,
+			"radius": 15
+		},
+		"size": 15
+	},
+	{
+		"type": "SMALL_CELL",
+		"team": "ORANGE",
+		"position": {
+			"x": 152,
+			"y": 468
+		},
+		"collisionCircle": {
+			"x": 152,
+			"y": 468,
+			"radius": 15
+		},
+		"size": 15
+	},
+	{
+		"type": "SMALL_CELL",
+		"team": "ORANGE",
+		"position": {
+			"x": 56,
+			"y": 223
+		},
+		"collisionCircle": {
+			"x": 56,
+			"y": 223,
+			"radius": 15
+		},
+		"size": 15
+	},
+	{
+		"type": "SMALL_CELL",
+		"team": "ORANGE",
+		"position": {
+			"x": 96,
+			"y": 138
+		},
+		"collisionCircle": {
+			"x": 96,
+			"y": 138,
+			"radius": 15
+		},
+		"size": 15
+	},
+	{
+		"type": "SMALL_CELL",
+		"team": "ORANGE",
+		"position": {
+			"x": 397,
+			"y": 56
+		},
+		"collisionCircle": {
+			"x": 397,
+			"y": 56,
+			"radius": 15
+		},
+		"size": 15
+	},
+	{
+		"type": "SMALL_CELL",
+		"team": "ORANGE",
+		"position": {
+			"x": 632,
+			"y": 74
+		},
+		"collisionCircle": {
+			"x": 632,
+			"y": 74,
+			"radius": 15
+		},
+		"size": 15
+	},
+	{
+		"type": "SMALL_CELL",
+		"team": "ORANGE",
+		"position": {
+			"x": 768,
+			"y": 247
+		},
+		"collisionCircle": {
+			"x": 768,
+			"y": 247,
+			"radius": 15
+		},
+		"size": 15
+	},
+	{
+		"type": "SMALL_CELL",
+		"team": "ORANGE",
+		"position": {
+			"x": 650,
+			"y": 448
+		},
+		"collisionCircle": {
+			"x": 650,
+			"y": 448,
+			"radius": 15
+		},
+		"size": 15
+	},
+	{
+		"type": "SMALL_CELL",
+		"team": "ORANGE",
+		"position": {
+			"x": 288,
+			"y": 429
+		},
+		"collisionCircle": {
+			"x": 288,
+			"y": 429,
+			"radius": 15
+		},
+		"size": 15
+	},
+	{
+		"type": "SMALL_CELL",
+		"team": "ORANGE",
+		"position": {
+			"x": 122,
+			"y": 390
+		},
+		"collisionCircle": {
+			"x": 122,
+			"y": 390,
+			"radius": 15
+		},
+		"size": 15
+	},
+	{
+		"type": "SMALL_CELL",
+		"team": "ORANGE",
+		"position": {
+			"x": 225,
+			"y": 172
+		},
+		"collisionCircle": {
+			"x": 225,
+			"y": 172,
+			"radius": 15
+		},
+		"size": 15
+	},
+	{
+		"type": "SMALL_CELL",
+		"team": "CYAN",
+		"position": {
+			"x": 201,
+			"y": 370
+		},
+		"collisionCircle": {
+			"x": 201,
+			"y": 370,
+			"radius": 15
+		},
+		"size": 15
+	},
+	{
+		"type": "SMALL_CELL",
+		"team": "CYAN",
+		"position": {
+			"x": 220,
+			"y": 241
+		},
+		"collisionCircle": {
+			"x": 220,
+			"y": 241,
+			"radius": 15
+		},
+		"size": 15
+	},
+	{
+		"type": "SMALL_CELL",
+		"team": "CYAN",
+		"position": {
+			"x": 142,
+			"y": 83
+		},
+		"collisionCircle": {
+			"x": 142,
+			"y": 83,
+			"radius": 15
+		},
+		"size": 15
+	},
+	{
+		"type": "SMALL_CELL",
+		"team": "CYAN",
+		"position": {
+			"x": 634,
+			"y": 197
+		},
+		"collisionCircle": {
+			"x": 634,
+			"y": 197,
+			"radius": 15
+		},
+		"size": 15
+	},
+	{
+		"type": "SMALL_CELL",
+		"team": "CYAN",
+		"position": {
+			"x": 433,
+			"y": 449
+		},
+		"collisionCircle": {
+			"x": 433,
+			"y": 449,
+			"radius": 15
+		},
+		"size": 15
+	},
+	{
+		"type": "SMALL_CELL",
+		"team": "RED",
+		"position": {
+			"x": 350,
+			"y": 323
+		},
+		"collisionCircle": {
+			"x": 350,
+			"y": 323,
+			"radius": 15
+		},
+		"size": 15
+	},
+	{
+		"type": "SMALL_CELL",
+		"team": "RED",
+		"position": {
+			"x": 405,
+			"y": 142
+		},
+		"collisionCircle": {
+			"x": 405,
+			"y": 142,
+			"radius": 15
+		},
+		"size": 15
+	},
+	{
+		"type": "SMALL_CELL",
+		"team": "RED",
+		"position": {
+			"x": 537,
+			"y": 403
+		},
+		"collisionCircle": {
+			"x": 537,
+			"y": 403,
+			"radius": 15
+		},
+		"size": 15
+	},
+	{
+		"type": "SMALL_CELL",
+		"team": "RED",
+		"position": {
+			"x": 370,
+			"y": 405
+		},
+		"collisionCircle": {
+			"x": 370,
+			"y": 405,
+			"radius": 15
+		},
+		"size": 15
+	},
+	{
+		"type": "SMALL_CELL",
+		"team": "RED",
+		"position": {
+			"x": 534,
+			"y": 190
+		},
+		"collisionCircle": {
+			"x": 534,
+			"y": 190,
+			"radius": 15
+		},
+		"size": 15
+	},
+	{
+		"type": "SMALL_CELL",
+		"team": "RED",
+		"position": {
+			"x": 351,
+			"y": 244
+		},
+		"collisionCircle": {
+			"x": 351,
+			"y": 244,
+			"radius": 15
+		},
+		"size": 15
+	},
+	{
+		"type": "SMALL_CELL",
+		"team": "CYAN",
+		"position": {
+			"x": 562,
+			"y": 312
+		},
+		"collisionCircle": {
+			"x": 562,
+			"y": 312,
+			"radius": 15
+		},
+		"size": 15
+	},
+	{
+		"type": "SMALL_CELL",
+		"team": "CYAN",
+		"position": {
+			"x": 266,
+			"y": 331
+		},
+		"collisionCircle": {
+			"x": 266,
+			"y": 331,
+			"radius": 15
+		},
+		"size": 15
+	},
+	{
+		"type": "SMALL_CELL",
+		"team": "CYAN",
+		"position": {
+			"x": 66,
+			"y": 340
+		},
+		"collisionCircle": {
+			"x": 66,
+			"y": 340,
+			"radius": 15
+		},
+		"size": 15
+	},
+	{
+		"type": "SMALL_CELL",
+		"team": "ORANGE",
+		"position": {
+			"x": 306,
+			"y": 157
+		},
+		"collisionCircle": {
+			"x": 306,
+			"y": 157,
+			"radius": 15
+		},
+		"size": 15
+	},
+	{
+		"type": "SMALL_CELL",
+		"team": "ORANGE",
+		"position": {
+			"x": 442,
+			"y": 218
+		},
+		"collisionCircle": {
+			"x": 442,
+			"y": 218,
+			"radius": 15
+		},
+		"size": 15
+	},
+	{
+		"type": "SMALL_CELL",
+		"team": "ORANGE",
+		"position": {
+			"x": 699,
+			"y": 387
+		},
+		"collisionCircle": {
+			"x": 699,
+			"y": 387,
+			"radius": 15
+		},
+		"size": 15
+	}
+]
+}

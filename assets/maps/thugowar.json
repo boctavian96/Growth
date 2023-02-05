@@ -1,0 +1,103 @@
+{
+"mapName": "ThugOWar",
+"cellList": [
+	{
+		"type": "MEDIUM_CELL",
+		"team": "RED",
+		"position": {
+			"x": 85,
+			"y": 288
+		},
+		"collisionCircle": {
+			"x": 85,
+			"y": 288,
+			"radius": 25
+		},
+		"size": 25
+	},
+	{
+		"type": "MEDIUM_CELL",
+		"team": "GREEN",
+		"position": {
+			"x": 718,
+			"y": 290
+		},
+		"collisionCircle": {
+			"x": 718,
+			"y": 290,
+			"radius": 25
+		},
+		"size": 25
+	},
+	{
+		"type": "MEDIUM_CELL",
+		"team": "NEUTRAL",
+		"position": {
+			"x": 717,
+			"y": 480
+		},
+		"collisionCircle": {
+			"x": 717,
+			"y": 480,
+			"radius": 25
+		},
+		"size": 25
+	},
+	{
+		"type": "MEDIUM_CELL",
+		"team": "NEUTRAL",
+		"position": {
+			"x": 722,
+			"y": 112
+		},
+		"collisionCircle": {
+			"x": 722,
+			"y": 112,
+			"radius": 25
+		},
+		"size": 25
+	},
+	{
+		"type": "MEDIUM_CELL",
+		"team": "NEUTRAL",
+		"position": {
+			"x": 87,
+			"y": 108
+		},
+		"collisionCircle": {
+			"x": 87,
+			"y": 108,
+			"radius": 25
+		},
+		"size": 25
+	},
+	{
+		"type": "MEDIUM_CELL",
+		"team": "NEUTRAL",
+		"position": {
+			"x": 83,
+			"y": 474
+		},
+		"collisionCircle": {
+			"x": 83,
+			"y": 474,
+			"radius": 25
+		},
+		"size": 25
+	},
+	{
+		"type": "LARGE_CELL",
+		"team": "NEUTRAL",
+		"position": {
+			"x": 415,
+			"y": 290
+		},
+		"collisionCircle": {
+			"x": 415,
+			"y": 290,
+			"radius": 35
+		},
+		"size": 35
+	}
+]
+}

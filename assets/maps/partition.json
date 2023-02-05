@@ -1,0 +1,173 @@
+{
+"mapName": "Partition",
+"cellList": [
+	{
+		"type": "LARGE_CELL",
+		"team": "RED",
+		"position": {
+			"x": 287,
+			"y": 439
+		},
+		"collisionCircle": {
+			"x": 287,
+			"y": 439,
+			"radius": 35
+		},
+		"size": 35
+	},
+	{
+		"type": "LARGE_CELL",
+		"team": "RED",
+		"position": {
+			"x": 544,
+			"y": 438
+		},
+		"collisionCircle": {
+			"x": 544,
+			"y": 438,
+			"radius": 35
+		},
+		"size": 35
+	},
+	{
+		"type": "LARGE_CELL",
+		"team": "YELLOW",
+		"position": {
+			"x": 276,
+			"y": 154
+		},
+		"collisionCircle": {
+			"x": 276,
+			"y": 154,
+			"radius": 35
+		},
+		"size": 35
+	},
+	{
+		"type": "LARGE_CELL",
+		"team": "YELLOW",
+		"position": {
+			"x": 554,
+			"y": 147
+		},
+		"collisionCircle": {
+			"x": 554,
+			"y": 147,
+			"radius": 35
+		},
+		"size": 35
+	},
+	{
+		"type": "MEDIUM_CELL",
+		"team": "NEUTRAL",
+		"position": {
+			"x": 371,
+			"y": 295
+		},
+		"collisionCircle": {
+			"x": 371,
+			"y": 295,
+			"radius": 25
+		},
+		"size": 25
+	},
+	{
+		"type": "MEDIUM_CELL",
+		"team": "NEUTRAL",
+		"position": {
+			"x": 467,
+			"y": 295
+		},
+		"collisionCircle": {
+			"x": 467,
+			"y": 295,
+			"radius": 25
+		},
+		"size": 25
+	},
+	{
+		"type": "SMALL_CELL",
+		"team": "NEUTRAL",
+		"position": {
+			"x": 549,
+			"y": 290
+		},
+		"collisionCircle": {
+			"x": 549,
+			"y": 290,
+			"radius": 15
+		},
+		"size": 15
+	},
+	{
+		"type": "SMALL_CELL",
+		"team": "NEUTRAL",
+		"position": {
+			"x": 598,
+			"y": 288
+		},
+		"collisionCircle": {
+			"x": 598,
+			"y": 288,
+			"radius": 15
+		},
+		"size": 15
+	},
+	{
+		"type": "SMALL_CELL",
+		"team": "NEUTRAL",
+		"position": {
+			"x": 651,
+			"y": 289
+		},
+		"collisionCircle": {
+			"x": 651,
+			"y": 289,
+			"radius": 15
+		},
+		"size": 15
+	},
+	{
+		"type": "SMALL_CELL",
+		"team": "NEUTRAL",
+		"position": {
+			"x": 283,
+			"y": 296
+		},
+		"collisionCircle": {
+			"x": 283,
+			"y": 296,
+			"radius": 15
+		},
+		"size": 15
+	},
+	{
+		"type": "SMALL_CELL",
+		"team": "NEUTRAL",
+		"position": {
+			"x": 223,
+			"y": 294
+		},
+		"collisionCircle": {
+			"x": 223,
+			"y": 294,
+			"radius": 15
+		},
+		"size": 15
+	},
+	{
+		"type": "SMALL_CELL",
+		"team": "NEUTRAL",
+		"position": {
+			"x": 164,
+			"y": 296
+		},
+		"collisionCircle": {
+			"x": 164,
+			"y": 296,
+			"radius": 15
+		},
+		"size": 15
+	}
+]
+}
