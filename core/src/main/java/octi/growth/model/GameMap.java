@@ -197,7 +197,7 @@ public class GameMap implements InputProcessor {
         Gdx.app.log("Mouse Click", screenX + " " + mouseY);
 
         for(Cell cell : cells){
-            if(cell.collisionRectangle.contains(screenX, mouseY)){
+            if(cell.collisionCircle.contains(screenX, mouseY)){
                 if(button == Input.Buttons.LEFT && cell.getTeam().equals(playerTeam)) {
                     Gdx.app.log("Selected Cell", "A cell has been selected");
                     sourceCell = cell;

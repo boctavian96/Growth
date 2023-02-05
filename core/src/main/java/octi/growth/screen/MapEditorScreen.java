@@ -245,7 +245,7 @@ public class MapEditorScreen extends AbstractScreen implements InputProcessor {
                 Cell newCell = new Cell(touchPoint, ghostCell.getType(), ghostCell.getTeam());
 
                 //Validate placement.
-                boolean isCellOverlapping = generatedCells.stream().anyMatch(cell -> cell.getCollisionRectangle().overlaps(newCell.getCollisionRectangle()));
+                boolean isCellOverlapping = generatedCells.stream().anyMatch(cell -> cell.getCollisionCircle().overlaps(newCell.getCollisionCircle()));
                 if (isCellOverlapping) {
                     Gdx.app.log("ERROR", "Cannot place cell, it overlaps!");
                 } else {
@@ -255,7 +255,7 @@ public class MapEditorScreen extends AbstractScreen implements InputProcessor {
         }
 
         if(button == Input.Buttons.RIGHT){
-            List<Cell> markedCells = generatedCells.stream().filter(cell -> cell.getCollisionRectangle().contains(touchPoint)).collect(Collectors.toList());
+            List<Cell> markedCells = generatedCells.stream().filter(cell -> cell.getCollisionCircle().contains(touchPoint)).collect(Collectors.toList());
             generatedCells.removeAll(markedCells);
             //Delete a Cell.
         }

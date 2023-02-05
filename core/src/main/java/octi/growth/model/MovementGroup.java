@@ -1,6 +1,9 @@
 package octi.growth.model;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import octi.growth.model.CellType;
@@ -11,24 +14,26 @@ public class MovementGroup {
     private boolean isAlive;
     private Team team;
     private int strength;
-    private Rectangle collisionRectangle;
+    private Circle collisionCircle;
     private float speed;
     private int damage;
     private Vector2 position;
     private Cell target;
+    Sound sound = Gdx.audio.newSound(Gdx.files.internal("assets/sounds/lose.mp3"));
+
 
     public MovementGroup(Team team, int size, Vector2 source, Cell target){
         this.isAlive = true;
         this.team = team;
         this.strength = size;
-        this.collisionRectangle = new Rectangle(source.x, source.y, 2, 2);
+        this.collisionCircle = new Circle(source.x, source.y, size);
         this.position = new Vector2(source.x, source.y);
         this.target = target;
         this.speed = 20f;
     }
 
     public void update(float delta){
-        if(!collisionRectangle.overlaps(target.getCollisionRectangle())){
+        if(!collisionCircle.overlaps(target.getCollisionCircle())){
             //Move to the target.
             moveTo(target.getPosition(), delta);
         }else {
@@ -38,6 +43,8 @@ public class MovementGroup {
                     target.setResources(target.getResources() + strength);
                 } else {
                     if (target.getResources() - strength < 0) {
+
+                        sound.play(1.0f);
                         strength = strength - target.getResources();
                         target.setTeam(team);
                         target.setResources(strength);
@@ -71,8 +78,8 @@ public class MovementGroup {
             position.y += speed * delta;
         }
 
-        collisionRectangle.setX(position.x);
-        collisionRectangle.setY(position.y);
+        collisionCircle.setX(position.x);
+        collisionCircle.setY(position.y);
     }
 
     public boolean isAlive() {

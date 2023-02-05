@@ -4,7 +4,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Vector2;
 
 public class Cell {
@@ -13,7 +13,7 @@ public class Cell {
     private CellType type;
     private Team team;
     public Vector2 position;
-    public Rectangle collisionRectangle;
+    public Circle collisionCircle;
     private int size;
     private int resources;
     private boolean selected;
@@ -31,15 +31,14 @@ public class Cell {
         size = cellType.size;
         resources = 0;
         this.team = team;
-        collisionRectangle = createCollisionRectangle(position, cellType);
+        collisionCircle = createCollisionCircle(position, cellType);
         selected = false;
     }
 
-    private Rectangle createCollisionRectangle(Vector2 position, CellType cellType){
+    private Circle createCollisionCircle(Vector2 position, CellType cellType){
         int xOffset = -cellType.size + 5;
         int yOffset = -cellType.size + 5;
-
-        return new Rectangle(position.x + xOffset, position.y + yOffset, cellType.size * 2 - 10, cellType.size * 2 - 10);
+        return new Circle(position.x, position.y, size);
     }
 
     public void update(){
@@ -66,7 +65,7 @@ public class Cell {
     }
 
     /**
-     * Drows the circle at half of alpha. Use only on the map editor.
+     * Draws the circle at half of alpha. Use only on the map editor.
      * @param sr
      */
     public void drawGhost(ShapeRenderer sr){
@@ -87,7 +86,7 @@ public class Cell {
         //Debug
         debugRenderer.setColor(Color.WHITE);
         debugRenderer.set(ShapeRenderer.ShapeType.Line);
-        debugRenderer.rect(collisionRectangle.x, collisionRectangle.y, collisionRectangle.width, collisionRectangle.height);
+        debugRenderer.circle(collisionCircle.x, collisionCircle.y, collisionCircle.radius);
     }
 
     public CellType getType() {
@@ -114,12 +113,12 @@ public class Cell {
         this.position = position;
     }
 
-    public Rectangle getCollisionRectangle() {
-        return collisionRectangle;
+    public Circle getCollisionCircle() {
+        return collisionCircle;
     }
 
-    public void setCollisionRectangle(Rectangle collisionRectangle) {
-        this.collisionRectangle = collisionRectangle;
+    public void setCollisionRectangle(Circle collisionCircle) {
+        this.collisionCircle = collisionCircle;
     }
 
     public int getSize() {
