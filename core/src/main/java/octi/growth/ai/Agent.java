@@ -17,6 +17,7 @@ public class Agent {
     private BehaviorTree<Agent> behaviorTree;
     private AgentWorld world;
     private float timer;
+    private boolean isAlive;
 
     //Hardcode for testing purpose;
     private Team team;
@@ -43,10 +44,13 @@ public class Agent {
     }
 
     public void update(float delta, List<Cell> mapCells, List<MovementGroup> movementGroups){
-        behaviorTree.step();
-        timer += delta;
-        world.setMapCells(mapCells);
-        world.setMovementGroups(movementGroups);
+        isAlive = checkAlive();
+        if(isAlive) {
+            behaviorTree.step();
+            timer += delta;
+            world.setMapCells(mapCells);
+            world.setMovementGroups(movementGroups);
+        }
     }
 
     public List<MovementGroup> fetch(){
@@ -111,6 +115,10 @@ public class Agent {
             MovementGroup mg = api.spawnMovementGroup(ownedCells.get(source), randomCells.get(target));
             movementGroups.add(mg);
         }
+    }
+
+    private boolean checkAlive(){
+        return world.getMapCells().stream().anyMatch(cell -> cell.getTeam().equals(team));
     }
 
     public void log(String msg){
