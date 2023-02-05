@@ -1,6 +1,11 @@
 d:assets:assets:0:application/unknown:1
 d:maps:maps:0:application/unknown:1
-t:maps/gladiator.json:maps/gladiator-28224326b8572180b65a1e06452d2157.json:757:application/unknown:1
+t:maps/partition.json:maps/partition-361d95071b7fe3ff4aea22048046ff9f.json:2206:application/unknown:1
+t:maps/the_line.json:maps/the_line-13a40a45deca8ab0b8260bd41016b69e.json:1842:application/unknown:1
+t:maps/particles.json:maps/particles-8247a4c2f80fc4f19c3771468315522d.json:6979:application/unknown:1
+t:maps/burst.json:maps/burst-b5b7807d6ac3f1e554c0f584edc00b27.json:2362:application/unknown:1
+t:maps/pyramid.json:maps/pyramid-d43d8d7de1a44708d476dfc822b0436e.json:1665:application/unknown:1
+t:maps/thugowar.json:maps/thugowar-8cecea29167aa14296b3d5b0e0c8b10b.json:1302:application/unknown:1
 d:ui:ui:0:application/unknown:1
 t:ui/font-window.fnt:ui/font-window-73e4ef96b1243364b96416c980322397.fnt:21146:application/unknown:1
 t:ui/font-list.fnt:ui/font-list-e0653fce5848e92b65f17f06365978dc.fnt:21142:application/unknown:1
@@ -13,9 +18,9 @@ d:sounds:sounds:0:application/unknown:1
 a:sounds/BGmusic.mp3:sounds/BGmusic-fff46de6ceb875c9c8af05e0a19ebe16.mp3:3266592:audio/mpeg:1
 a:sounds/lose.mp3:sounds/lose-41690a0bf7f7cfdd427648c1f299a6e7.mp3:42675:audio/mpeg:1
 d:ai:ai:0:application/unknown:1
-b:ai/hardAI.tree:ai/hardAI-d41d8cd98f00b204e9800998ecf8427e.tree:0:application/unknown:1
+b:ai/hardAI.tree:ai/hardAI-edf9373c2c26cb92d3c370ba2db5c3cb.tree:6:application/unknown:1
 b:ai/basicAI.tree:ai/basicAI-2af02b97e12e371478413b3b108de97e.tree:337:application/unknown:1
-b:ai/normalAI.tree:ai/normalAI-d41d8cd98f00b204e9800998ecf8427e.tree:0:application/unknown:1
+b:ai/normalAI.tree:ai/normalAI-edf9373c2c26cb92d3c370ba2db5c3cb.tree:6:application/unknown:1
 t:com/badlogic/gdx/graphics/g3d/particles/particles.fragment.glsl:particles.fragment-b90524761fdf09b0a836056d590c30b8.glsl:820:application/unknown:1
 t:com/badlogic/gdx/graphics/g3d/particles/particles.vertex.glsl:particles.vertex-f25b8b2fae10b9bfa09bfdd484923148.glsl:2886:application/unknown:1
 t:com/badlogic/gdx/graphics/g3d/shaders/default.fragment.glsl:default.fragment-e1c018bd48044c8b67c7bbc53145e540.glsl:5874:application/unknown:1

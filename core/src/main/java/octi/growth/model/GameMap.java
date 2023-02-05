@@ -61,6 +61,7 @@ public class GameMap implements InputProcessor {
 
         if(context.isAiBattle()){
             //All AI on the map.
+            playerTeam = Team.NEUTRAL;
             for(Cell c : cells){
                 if(!c.getTeam().equals(Team.NEUTRAL)){
                     availableTeams.add(c.getTeam());
@@ -177,7 +178,8 @@ public class GameMap implements InputProcessor {
         List<Agent> agents = new ArrayList<>();
         for(Team t : availableTeams){
             String agentName = "Agent " + Math.random();
-            BehaviorTree<Agent> behaviorTree = BehaviorTreeCreator.createBehaviorTree("ai/basicAI.tree", agentName);
+            //BehaviorTree<Agent> behaviorTree = BehaviorTreeCreator.createBehaviorTree("ai/basicAI.tree", agentName);
+            BehaviorTree<Agent> behaviorTree = BehaviorTreeCreator.createBehaviorTree(agentName);
             AgentWorld world = new AgentWorld(cells, movementGroups);
             agents.add(new Agent(agentName, behaviorTree, world, this, t));
         }
