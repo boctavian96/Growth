@@ -1,0 +1,75 @@
+{
+mapName: tutorial
+cellList: [
+	{
+		type: LARGE_CELL
+		team: RED
+		position: {
+			x: 520
+			y: 395
+		}
+		collisionCircle: {
+			x: 520
+			y: 395
+			radius: 35
+		}
+		size: 35
+	}
+	{
+		type: LARGE_CELL
+		team: RED
+		position: {
+			x: 237
+			y: 280
+		}
+		collisionCircle: {
+			x: 237
+			y: 280
+			radius: 35
+		}
+		size: 35
+	}
+	{
+		type: LARGE_CELL
+		team: RED
+		position: {
+			x: 470
+			y: 163
+		}
+		collisionCircle: {
+			x: 470
+			y: 163
+			radius: 35
+		}
+		size: 35
+	}
+	{
+		type: LARGE_CELL
+		team: RED
+		position: {
+			x: 277
+			y: 440
+		}
+		collisionCircle: {
+			x: 277
+			y: 440
+			radius: 35
+		}
+		size: 35
+	}
+	{
+		type: LARGE_CELL
+		team: RED
+		position: {
+			x: 396
+			y: 298
+		}
+		collisionCircle: {
+			x: 396
+			y: 298
+			radius: 35
+		}
+		size: 35
+	}
+]
+}
