@@ -16,6 +16,11 @@ public class Cell {
     public Circle collisionCircle;
     private int size;
     private int resources;
+
+    public void setSelected(boolean selected) {
+        this.selected = selected;
+    }
+
     private boolean selected;
 
     /**
@@ -117,7 +122,7 @@ public class Cell {
         return collisionCircle;
     }
 
-    public void setCollisionRectangle(Circle collisionCircle) {
+    public void setCollisionCircle(Circle collisionCircle) {
         this.collisionCircle = collisionCircle;
     }
 
@@ -143,5 +148,9 @@ public class Cell {
             return;
         }
         this.resources = resources;
+    }
+
+    public boolean isSelected() {
+        return selected;
     }
 }

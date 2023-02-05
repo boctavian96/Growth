@@ -87,6 +87,15 @@ public class GameMap implements InputProcessor {
         movementGroups.forEach(mg -> mg.draw(shapeRenderer));
         shapeRenderer.end();
 
+        //Add debug outline to selected cell
+        shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
+        cells.forEach(cell -> {
+            if(cell.isSelected()){
+                cell.drawDebug(shapeRenderer);
+            }
+        });
+        shapeRenderer.end();
+
         //Draw Resources.
         batch.begin();
         cells.forEach(cell -> cell.drawResources(batch));
@@ -94,7 +103,6 @@ public class GameMap implements InputProcessor {
 
         agents.forEach(a -> a.update(dt, cells, movementGroups));
         agents.forEach(a -> movementGroups.addAll(a.fetch()));
-
         //Draw Debug
         if(game.isDebugMode()) {
             time += dt;
@@ -200,6 +208,13 @@ public class GameMap implements InputProcessor {
             if(cell.collisionCircle.contains(screenX, mouseY)){
                 if(button == Input.Buttons.LEFT && cell.getTeam().equals(playerTeam)) {
                     Gdx.app.log("Selected Cell", "A cell has been selected");
+                    //Set last clicked cell to selected, deselect previous selected cell
+                    if(sourceCell!=null){
+                        cells.stream()
+                            .filter(playerCell -> playerCell.isSelected() == true).findFirst()
+                            .ifPresent(playerCell -> playerCell.setSelected(false));
+                    }
+                    cell.setSelected(true);
                     sourceCell = cell;
                     return false;
                 }
