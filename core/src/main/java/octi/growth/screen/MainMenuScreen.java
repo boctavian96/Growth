@@ -1,16 +1,16 @@
 package octi.growth.screen;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.*;
 import octi.growth.Growth;
 import octi.growth.input.ChangeScreenEvent;
 import octi.growth.input.ExitEvent;
 
 public class MainMenuScreen extends AbstractScreen {
     private Stage uiStage;
+    private Texture background;
 
     public MainMenuScreen(Growth game){
         super(game);
@@ -18,13 +18,21 @@ public class MainMenuScreen extends AbstractScreen {
 
     @Override
     public void show() {
+        background = new Texture(Gdx.files.internal("images/background.png"));
+        Image img = new Image(background);
+
         uiStage = new Stage();
+        uiStage.addActor(img);
         Skin uiSkin = loadSkin();
 
         Table table = new Table();
         table.setFillParent(true);
         table.defaults().width(100).pad(5);
 
+        Label gameName = new Label("Planet Invaders", uiSkin);
+        gameName.setFontScale(3);
+        gameName.setPosition(280,420);
+        uiStage.addActor(gameName);
         TextButton playButton = new TextButton("Play", uiSkin);
         //playButton.addListener(new ChangeScreenEvent(game, ScreenType.GAME));
         playButton.addListener(new ChangeScreenEvent(game, ScreenType.GAME_SELECTION_SCREEN));
