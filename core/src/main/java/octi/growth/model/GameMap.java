@@ -10,20 +10,28 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Json;
 import octi.growth.Growth;
 import octi.growth.ai.Agent;
 import octi.growth.ai.AgentWorld;
 import octi.growth.ai.BehaviorTreeCreator;
 import octi.growth.screen.GameplayScreenContext;
+import octi.growth.screen.MainMenuScreen;
+import octi.growth.ui.GameEndWidget;
 
 import java.util.*;
 
 public class GameMap implements InputProcessor {
+    private final GameplayScreenContext context;
+
+    private boolean isGameFinished;
+
     private final Growth game;
     private final BitmapFont debugFont;
-    private final List<Cell> cells;
-    private final List<MovementGroup> movementGroups;
+    private List<Cell> cells;
+    private List<MovementGroup> movementGroups;
     private List<Agent> agents;
 
     float time = 0;
@@ -35,8 +43,19 @@ public class GameMap implements InputProcessor {
 
     Team playerTeam;
 
-    public GameMap(Growth game, GameplayScreenContext context){
+    Stage uiStage;
+    GameEndWidget gameEndWidget;
+
+    public GameMap(Growth game, GameplayScreenContext context, Stage uiStage) {
         this.game = game;
+        this.context = context;
+        this.debugFont = new BitmapFont();
+        this.uiStage = uiStage;
+        create();
+    }
+
+    private void create(){
+        this.isGameFinished = false;
 
         StringBuilder mapPath = new StringBuilder("maps/");
         mapPath.append(context.getMapName());
@@ -49,27 +68,26 @@ public class GameMap implements InputProcessor {
         Json json = new Json();
         MapModel mapModel = json.fromJson(MapModel.class, jsonString);
 
-        if(!playerTeam.equals(Team.RED)){
+        if (!playerTeam.equals(Team.RED)) {
             mapModel.changePlayerColor(playerTeam);
         }
 
         cells = mapModel.getCellList();
-        debugFont = new BitmapFont();
         movementGroups = new ArrayList<>();
 
         Set<Team> availableTeams = new HashSet<>();
 
-        if(context.isAiBattle()){
+        if (context.isAiBattle()) {
             //All AI on the map.
             playerTeam = Team.NEUTRAL;
-            for(Cell c : cells){
-                if(!c.getTeam().equals(Team.NEUTRAL)){
+            for (Cell c : cells) {
+                if (!c.getTeam().equals(Team.NEUTRAL)) {
                     availableTeams.add(c.getTeam());
                 }
             }
-        }else{
-            for(Cell c : cells){
-                if(!c.getTeam().equals(Team.NEUTRAL) && !c.getTeam().equals(playerTeam)){
+        } else {
+            for (Cell c : cells) {
+                if (!c.getTeam().equals(Team.NEUTRAL) && !c.getTeam().equals(playerTeam)) {
                     availableTeams.add(c.getTeam());
                 }
             }
@@ -78,7 +96,7 @@ public class GameMap implements InputProcessor {
         agents = createAgents(availableTeams);
     }
 
-    public void draw(ShapeRenderer shapeRenderer, SpriteBatch batch, float dt){
+    public void draw(ShapeRenderer shapeRenderer, SpriteBatch batch, float dt) {
         //Draw Paths
         drawPaths(cells, shapeRenderer);
 
@@ -91,7 +109,7 @@ public class GameMap implements InputProcessor {
         //Add debug outline to selected cell
         shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
         cells.forEach(cell -> {
-            if(cell.isSelected()){
+            if (cell.isSelected()) {
                 cell.drawDebug(shapeRenderer);
             }
         });
@@ -101,19 +119,20 @@ public class GameMap implements InputProcessor {
         batch.begin();
         cells.forEach(cell -> cell.drawResources(batch));
         batch.end();
+        uiStage.draw();
 
-        agents.forEach(a -> a.update(dt, cells, movementGroups));
-        agents.forEach(a -> movementGroups.addAll(a.fetch()));
+
+
         //Draw Debug
-        if(game.isDebugMode()) {
+        if (game.isDebugMode()) {
             time += dt;
             shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
             cells.forEach(cell -> cell.drawDebug(shapeRenderer));
             shapeRenderer.end();
 
-            if(time >= 1) {
+            if (time >= 1) {
                 time = 0;
-                fps = (int) (1/dt);
+                fps = (int) (1 / dt);
             }
 
             batch.begin();
@@ -122,22 +141,59 @@ public class GameMap implements InputProcessor {
         }
     }
 
-    public void update(float dt){
-        cellTime += dt;
-        if(cellTime > 1){
-            cells.forEach(Cell::update);
-            cellTime = 0;
-        }
+    public void update(float dt) {
+        if (!isGameFinished) {
+            cellTime += dt;
+            if (cellTime > 1) {
+                cells.forEach(Cell::update);
+                cellTime = 0;
+            }
 
-        movementGroups.forEach(group -> group.update(dt));
-        checkWin();
+            movementGroups.forEach(group -> group.update(dt));
+
+            agents.forEach(a -> a.update(dt, cells, movementGroups));
+            agents.forEach(a -> movementGroups.addAll(a.fetch()));
+            isGameFinished = checkWin();
+        }
+        uiStage.act(dt);
+
+        if(isGameFinished){
+            int status = gameEndWidget.getStatus();
+
+            if(status == 1){
+                //Go to main menu.
+                game.setScreen(new MainMenuScreen(game));
+            }
+
+            if(status == 2){
+                //Restart level.
+                create();
+            }
+        }
     }
 
-    private boolean checkWin(){
+    private boolean checkWin() {
+        if (!context.isAiBattle()) {
+            //If only one color on the board its a win.
+            boolean isTheGameFinished = cells.stream().map(cell -> cell.getTeam()).distinct().limit(2).count() <= 1;
+
+            if (isTheGameFinished) {
+                if (cells.get(0).getTeam().equals(playerTeam)) {
+                    gameEndWidget = new GameEndWidget("Status", new Skin(Gdx.files.internal("ui/uiskin.json")), true);
+                    Gdx.app.log("Victory", "Player has won!");
+                } else {
+                    gameEndWidget = new GameEndWidget("Status", new Skin(Gdx.files.internal("ui/uiskin.json")), false);
+                    Gdx.app.log("Loss", "Player has lost");
+                }
+
+                uiStage.addActor(gameEndWidget);
+                return true;
+            }
+        }
         return false;
     }
 
-    public MovementGroup spawnMovementGroup(Cell sourceCell, Cell targetCell){
+    public MovementGroup spawnMovementGroup(Cell sourceCell, Cell targetCell) {
         int resources = sourceCell.getResources();
         sourceCell.setResources(0);
         sourceCell.getTeam();
@@ -146,19 +202,19 @@ public class GameMap implements InputProcessor {
         return new MovementGroup(sourceCell.getTeam(), resources, sourceCell.getPosition(), targetCell);
     }
 
-    public void spawnMovementGroupAI(Cell sourceCell, Cell targetCell){
+    public void spawnMovementGroupAI(Cell sourceCell, Cell targetCell) {
         spawnMovementGroup(sourceCell, targetCell);
     }
 
-    private void drawPaths(List<Cell> cells, ShapeRenderer sr){
-        for(int i = 0; i<cells.size()/2; i++){
-            for(int j = i + 1; j<cells.size(); j++) {
+    private void drawPaths(List<Cell> cells, ShapeRenderer sr) {
+        for (int i = 0; i < cells.size() / 2; i++) {
+            for (int j = i + 1; j < cells.size(); j++) {
                 drawDotedLine(sr, 5, cells.get(i).position, cells.get(j).position);
             }
         }
     }
 
-    private void drawDotedLine(ShapeRenderer sr, final int dotDistance, Vector2 startPosition, Vector2 destinationPosition){
+    private void drawDotedLine(ShapeRenderer sr, final int dotDistance, Vector2 startPosition, Vector2 destinationPosition) {
         sr.begin(ShapeRenderer.ShapeType.Line);
         sr.setColor(Color.WHITE);
         Vector2 start = new Vector2(startPosition);
@@ -166,7 +222,7 @@ public class GameMap implements InputProcessor {
         Vector2 vector2 = end.sub(start);
         float length = vector2.len();
 
-        for(int i = 0; i < length; i+= dotDistance){
+        for (int i = 0; i < length; i += dotDistance) {
             vector2.clamp(length - i, length - i);
             sr.point(start.x + vector2.x, start.y + vector2.y, 0);
         }
@@ -174,9 +230,9 @@ public class GameMap implements InputProcessor {
         sr.end();
     }
 
-    public List<Agent> createAgents(Set<Team> availableTeams){
+    public List<Agent> createAgents(Set<Team> availableTeams) {
         List<Agent> agents = new ArrayList<>();
-        for(Team t : availableTeams){
+        for (Team t : availableTeams) {
             String agentName = "Agent " + Math.random();
             //BehaviorTree<Agent> behaviorTree = BehaviorTreeCreator.createBehaviorTree("ai/basicAI.tree", agentName);
             BehaviorTree<Agent> behaviorTree = BehaviorTreeCreator.createBehaviorTree(agentName);
@@ -193,6 +249,10 @@ public class GameMap implements InputProcessor {
 
     @Override
     public boolean keyUp(int keycode) {
+        //Cheat code, for debugging purposes.
+        if(keycode == Input.Keys.K){
+            cells.forEach(cell -> cell.setTeam(playerTeam));
+        }
         return false;
     }
 
@@ -206,12 +266,12 @@ public class GameMap implements InputProcessor {
         int mouseY = Gdx.graphics.getHeight() - screenY;
         Gdx.app.log("Mouse Click", screenX + " " + mouseY);
 
-        for(Cell cell : cells){
-            if(cell.collisionCircle.contains(screenX, mouseY)){
-                if(button == Input.Buttons.LEFT && cell.getTeam().equals(playerTeam)) {
+        for (Cell cell : cells) {
+            if (cell.collisionCircle.contains(screenX, mouseY)) {
+                if (button == Input.Buttons.LEFT && cell.getTeam().equals(playerTeam)) {
                     Gdx.app.log("Selected Cell", "A cell has been selected");
                     //Set last clicked cell to selected, deselect previous selected cell
-                    if(sourceCell!=null){
+                    if (sourceCell != null) {
                         cells.stream()
                             .filter(playerCell -> playerCell.isSelected() == true).findFirst()
                             .ifPresent(playerCell -> playerCell.setSelected(false));
@@ -220,13 +280,13 @@ public class GameMap implements InputProcessor {
                     sourceCell = cell;
                     return false;
                 }
-                if(button == Input.Buttons.RIGHT){
-                    if(Objects.isNull(sourceCell) || sourceCell.equals(targetCell)){
+                if (button == Input.Buttons.RIGHT) {
+                    if (Objects.isNull(sourceCell) || sourceCell.equals(targetCell)) {
                         targetCell = null;
                         return false;
-                    }else{
+                    } else {
                         //Spawn Attack or reinforce.
-                        if(sourceCell.getResources() > 0) {
+                        if (sourceCell.getResources() > 0) {
                             targetCell = cell;
                             movementGroups.add(spawnMovementGroup(sourceCell, targetCell));
                             Gdx.app.log("MOVE", "Spawned movement group");

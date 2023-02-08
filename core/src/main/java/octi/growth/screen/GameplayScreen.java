@@ -5,6 +5,7 @@ import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import octi.growth.Growth;
 import octi.growth.input.GlobalKeyboardInput;
@@ -19,12 +20,17 @@ public class GameplayScreen extends AbstractScreen {
     private SpriteBatch spriteBatch;
     private GameMap map;
 
+    private Stage uiStage;
+
     private final InputMultiplexer inputMultiplexer;
 
     public GameplayScreen(Growth game, GameplayScreenContext context){
         super(game);
         this.context = context;
+        this.uiStage = new Stage();
+
         inputMultiplexer = new InputMultiplexer();
+        inputMultiplexer.addProcessor(uiStage);
     }
 
     @Override
@@ -45,7 +51,7 @@ public class GameplayScreen extends AbstractScreen {
         spriteBatch = new SpriteBatch();
 
         //Prepare Map.
-        map = new GameMap(game, context);
+        map = new GameMap(game, context, uiStage);
         inputMultiplexer.addProcessor(map);
         Gdx.input.setInputProcessor(inputMultiplexer);
 
