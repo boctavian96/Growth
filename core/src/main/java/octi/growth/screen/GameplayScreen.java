@@ -2,6 +2,7 @@ package octi.growth.screen;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -62,6 +63,9 @@ public class GameplayScreen extends AbstractScreen {
         // Draw your screen here. "delta" is the time since last render in seconds.
         super.render(delta);
         camera.update();
+
+        Gdx.gl.glEnable(GL20.GL_BLEND);
+        Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
 
         shapeRenderer.setProjectionMatrix(camera.combined);
         spriteBatch.setProjectionMatrix(camera.combined);

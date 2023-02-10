@@ -209,7 +209,8 @@ public class GameMap implements InputProcessor {
     private void drawPaths(List<Cell> cells, ShapeRenderer sr) {
         for (int i = 0; i < cells.size() / 2; i++) {
             for (int j = i + 1; j < cells.size(); j++) {
-                drawDotedLine(sr, 5, cells.get(i).position, cells.get(j).position);
+                //drawDotedLine(sr, 5, cells.get(i).position, cells.get(j).position);
+                drawLine(sr, cells.get(i).position, cells.get(j).position);
             }
         }
     }
@@ -227,6 +228,13 @@ public class GameMap implements InputProcessor {
             sr.point(start.x + vector2.x, start.y + vector2.y, 0);
         }
 
+        sr.end();
+    }
+
+    private void drawLine(ShapeRenderer sr, Vector2 startPosition, Vector2 destinationPositition){
+        sr.begin(ShapeRenderer.ShapeType.Line);
+        sr.setColor(Color.WHITE);
+        sr.rectLine(startPosition, destinationPositition, 3);
         sr.end();
     }
 

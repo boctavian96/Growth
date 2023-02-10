@@ -77,6 +77,7 @@ public class TutorialWidget extends Table {
                 break;
             case 3:
                 label.setText("Tutorial #3\n\nNow let's start an attack! With your planet selected right click on the gray planet!");
+                nextButton.setText("Next");
                 break;
             case 4:
                 label.setText("Congratulations!\n\nNow it's time to grow your empire!");

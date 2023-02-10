@@ -3,15 +3,18 @@ package octi.growth.lwjgl3;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
 import octi.growth.Growth;
+import octi.growth.platform.Platform;
 
-/** Launches the desktop (LWJGL3) application. */
+/**
+ * Launches the desktop (LWJGL3) application.
+ */
 public class Lwjgl3Launcher {
     public static void main(String[] args) {
         createApplication();
     }
 
     private static Lwjgl3Application createApplication() {
-        return new Lwjgl3Application(new Growth(), getDefaultConfiguration());
+        return new Lwjgl3Application(new Growth(Platform.DESKTOP), getDefaultConfiguration());
     }
 
     private static Lwjgl3ApplicationConfiguration getDefaultConfiguration() {

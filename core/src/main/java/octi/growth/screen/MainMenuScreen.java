@@ -9,12 +9,13 @@ import octi.growth.Constants;
 import octi.growth.Growth;
 import octi.growth.input.ChangeScreenEvent;
 import octi.growth.input.ExitEvent;
+import octi.growth.platform.Platform;
 
 public class MainMenuScreen extends AbstractScreen {
     private Stage uiStage;
     private Texture background;
 
-    public MainMenuScreen(Growth game){
+    public MainMenuScreen(Growth game) {
         super(game);
     }
 
@@ -33,7 +34,7 @@ public class MainMenuScreen extends AbstractScreen {
 
         Label gameName = new Label("Planet Invaders", uiSkin);
         gameName.setFontScale(3);
-        gameName.setPosition(280,420);
+        gameName.setPosition(280, 420);
         uiStage.addActor(gameName);
         TextButton playButton = new TextButton("Play", uiSkin);
         playButton.addListener(new ChangeScreenEvent(game, ScreenType.GAME_SELECTION_SCREEN));
@@ -50,10 +51,15 @@ public class MainMenuScreen extends AbstractScreen {
         exitButton.addListener(new ExitEvent());
 
         table.add(playButton).row();
-        table.add(mapEditorButton).row();
+        if (game.getPlatform().equals(Platform.DESKTOP)) {
+            table.add(mapEditorButton).row();
+        }
         table.add(tutorialButton).row();
-        table.add(optionsButton).row();
-        table.add(exitButton).row();
+        //Not yet implemented. :(
+        //table.add(optionsButton).row();
+        if (game.getPlatform().equals(Platform.DESKTOP)) {
+            table.add(exitButton).row();
+        }
 
         uiStage.addActor(table);
 

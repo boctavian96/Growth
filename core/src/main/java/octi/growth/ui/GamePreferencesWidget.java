@@ -31,7 +31,7 @@ public class GamePreferencesWidget extends WidgetGroup {
     private Map<String, String> maps;
 
 
-    public GamePreferencesWidget(Skin uiSkin, Growth game){
+    public GamePreferencesWidget(Skin uiSkin, Growth game) {
         //TODO: Idea, add here a window, will make everything visible.
         this.game = game;
         context = new GameplayScreenContext();
@@ -39,16 +39,20 @@ public class GamePreferencesWidget extends WidgetGroup {
         maps = new HashMap<>();
 
         //Read map names;
+        //GWT Configuration.
         FileHandle[] listOfFiles = Gdx.files.internal("maps/").list();
-        if(listOfFiles.length == 0){
+        if (listOfFiles.length == 0) {
+            //Desktop Configuration.
             listOfFiles = Gdx.files.internal("assets/maps/").list();
         }
-            for(int i=0; i<listOfFiles.length; i++){
-                Json json = new Json();
-                json.setOutputType(JsonWriter.OutputType.json);
-                MapModel gameMap = json.fromJson(MapModel.class, listOfFiles[i].readString());
+        for (int i = 0; i < listOfFiles.length; i++) {
+            Json json = new Json();
+            json.setOutputType(JsonWriter.OutputType.json);
+            MapModel gameMap = json.fromJson(MapModel.class, listOfFiles[i].readString());
+            if (!gameMap.getMapName().equals("tutorial")) {
                 maps.put(gameMap.getMapName(), listOfFiles[i].name());
             }
+        }
 
 
         Table table = new Table();
@@ -71,7 +75,7 @@ public class GamePreferencesWidget extends WidgetGroup {
         playButton = new TextButton("Start", uiSkin);
         playButton.addListener(new ChangeScreenEvent(game, ScreenType.GAME, context));
 
-        table.add(new Label("Game Preferences", uiSkin)).row();
+        table.add(new Label("Game Preferences\n\n", uiSkin)).row();
         table.add(new Label("Select Difficulty:", uiSkin));
         table.add(difficultyBox).row();
         table.add(new Label("Select map:", uiSkin));
@@ -96,16 +100,16 @@ public class GamePreferencesWidget extends WidgetGroup {
         updateContext();
     }
 
-    public void updateContext(){
+    public void updateContext() {
         context.setAiDifficulty(difficultyBox.getSelected());
         context.setMapName(maps.get(mapNameBox.getSelected()));
         context.setPlayerTeam(CellStatsUtils.getTeam(playerColorBox.getSelected()));
         context.setAiBattle(aiBrawl.isChecked());
     }
 
-    private Array<String> getMapNames(Map<String, String> map){
+    private Array<String> getMapNames(Map<String, String> map) {
         Array<String> mapNames = new Array<>();
-        map.forEach((k, v)-> {
+        map.forEach((k, v) -> {
             mapNames.add(k);
         });
         return mapNames;
