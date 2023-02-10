@@ -39,4 +39,14 @@ public class GameplayScreenContext {
     public void setAiBattle(boolean aiBattle) {
         this.aiBattle = aiBattle;
     }
+
+    public static final GameplayScreenContext tutorialContext(){
+        GameplayScreenContext ctx = new GameplayScreenContext();
+        ctx.setAiBattle(false);
+        ctx.setPlayerTeam(Team.RED);
+        ctx.setAiDifficulty("None");
+        ctx.setAiBattle(false);
+        ctx.setMapName("tutorial.json");
+        return ctx;
+    }
 }

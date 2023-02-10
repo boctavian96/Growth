@@ -1,9 +1,11 @@
 package octi.growth.screen;
 
+import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
+import octi.growth.Constants;
 import octi.growth.Growth;
 import octi.growth.input.ChangeScreenEvent;
 import octi.growth.input.ExitEvent;
@@ -18,7 +20,7 @@ public class MainMenuScreen extends AbstractScreen {
 
     @Override
     public void show() {
-        background = new Texture(Gdx.files.internal("images/background.png"));
+        background = new Texture(Gdx.files.internal(Constants.BACKGROUND));
         Image img = new Image(background);
 
         uiStage = new Stage();
@@ -34,7 +36,6 @@ public class MainMenuScreen extends AbstractScreen {
         gameName.setPosition(280,420);
         uiStage.addActor(gameName);
         TextButton playButton = new TextButton("Play", uiSkin);
-        //playButton.addListener(new ChangeScreenEvent(game, ScreenType.GAME));
         playButton.addListener(new ChangeScreenEvent(game, ScreenType.GAME_SELECTION_SCREEN));
 
         TextButton mapEditorButton = new TextButton("Map Editor", uiSkin);

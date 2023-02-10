@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import octi.growth.Constants;
 import octi.growth.model.CellType;
 import octi.growth.model.Team;
 
@@ -19,7 +20,7 @@ public class MovementGroup {
     private int damage;
     private Vector2 position;
     private Cell target;
-    Sound sound = Gdx.audio.newSound(Gdx.files.internal("sounds/lose.mp3"));
+    Sound sound = Gdx.audio.newSound(Gdx.files.internal(Constants.LOSE_SOUND));
 
 
     public MovementGroup(Team team, int size, Vector2 source, Cell target){
@@ -43,7 +44,7 @@ public class MovementGroup {
                     target.setResources(target.getResources() + strength);
                 } else {
                     if (target.getResources() - strength < 0) {
-
+                        //Cell changes owner.
                         sound.play(1.0f);
                         strength = strength - target.getResources();
                         target.setTeam(team);

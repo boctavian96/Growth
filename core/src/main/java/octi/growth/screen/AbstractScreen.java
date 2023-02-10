@@ -4,6 +4,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import jdk.tools.jlink.internal.Platform;
+import octi.growth.Constants;
 import octi.growth.Growth;
 
 public abstract class AbstractScreen implements Screen {
@@ -19,7 +21,7 @@ public abstract class AbstractScreen implements Screen {
     }
 
     protected Skin loadSkin(){
-        return new Skin(Gdx.files.internal("ui/uiskin.json"));
+        return new Skin(Gdx.files.internal(Constants.UI_SKIN));
     }
 
     @Override

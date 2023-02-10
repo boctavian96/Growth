@@ -1,0 +1,33 @@
+{
+"mapName": "tutorial",
+"cellList": [
+	{
+		"type": "LARGE_CELL",
+		"team": "RED",
+		"position": {
+			"x": 103,
+			"y": 278
+		},
+		"collisionCircle": {
+			"x": 103,
+			"y": 278,
+			"radius": 35
+		},
+		"size": 35
+	},
+	{
+		"type": "MEDIUM_CELL",
+		"team": "NEUTRAL",
+		"position": {
+			"x": 276,
+			"y": 367
+		},
+		"collisionCircle": {
+			"x": 276,
+			"y": 367,
+			"radius": 25
+		},
+		"size": 25
+	}
+]
+}
