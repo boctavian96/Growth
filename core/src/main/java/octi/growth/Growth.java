@@ -46,8 +46,8 @@ public class Growth extends Game {
 
     private Preferences preparePreferences() {
         Preferences preferences = Gdx.app.getPreferences("preferences");
-        preferences.putFloat("musicVolume", 0.3f);
-        preferences.putFloat("soundVolume", 0.3f);
+        preferences.putFloat("musicVolume", 0.2f);
+        preferences.putFloat("soundVolume", 0.2f);
         preferences.putBoolean("muteMusic", false);
         preferences.putBoolean("muteSound", false);
         preferences.flush();
@@ -57,6 +57,19 @@ public class Growth extends Game {
 
     public void setMusicVolume(float volume) {
         music.setVolume(volume);
+    }
+
+    public void muteSound() {
+        Preferences preferences = Gdx.app.getPreferences("preferences");
+
+        boolean isMusicMuted = preferences.getBoolean("muteMusic");
+
+        if (isMusicMuted) {
+            music.pause();
+        } else {
+            music.play();
+        }
+
     }
 
 }

@@ -1,6 +1,7 @@
 package octi.growth.model;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Circle;
@@ -23,7 +24,7 @@ public class MovementGroup {
     Sound sound = Gdx.audio.newSound(Gdx.files.internal(Constants.LOSE_SOUND));
 
 
-    public MovementGroup(Team team, int size, Vector2 source, Cell target){
+    public MovementGroup(Team team, int size, Vector2 source, Cell target) {
         this.isAlive = true;
         this.team = team;
         this.strength = size;
@@ -33,11 +34,11 @@ public class MovementGroup {
         this.speed = 20f;
     }
 
-    public void update(float delta){
-        if(!collisionCircle.overlaps(target.getCollisionCircle())){
+    public void update(float delta) {
+        if (!collisionCircle.overlaps(target.getCollisionCircle())) {
             //Move to the target.
             moveTo(target.getPosition(), delta);
-        }else {
+        } else {
             //Hit target.
             if (isAlive) {
                 if (target.getTeam().equals(team)) {
@@ -45,7 +46,7 @@ public class MovementGroup {
                 } else {
                     if (target.getResources() - strength < 0) {
                         //Cell changes owner.
-                        sound.play(1.0f);
+                        playSound();
                         strength = strength - target.getResources();
                         target.setTeam(team);
                         target.setResources(strength);
@@ -58,24 +59,36 @@ public class MovementGroup {
         }
     }
 
-    public void draw(ShapeRenderer sr){
+    private void playSound() {
+        Preferences preferences = Gdx.app.getPreferences("preferences");
+        boolean isSoundMuted = preferences.getBoolean("muteSound");
+
+        if (isSoundMuted) {
+            return;
+        } else {
+            float soundVolume = preferences.getFloat("soundVolume");
+            sound.play(soundVolume);
+        }
+    }
+
+    public void draw(ShapeRenderer sr) {
         //TODO: Remove hard coding.
-        if(isAlive()) {
+        if (isAlive()) {
             sr.setColor(team.color);
             sr.rect(position.x, position.y, 10, 10);
         }
     }
 
-    private void moveTo(Vector2 target, float delta){
-        if(position.x > target.x){
+    private void moveTo(Vector2 target, float delta) {
+        if (position.x > target.x) {
             position.x -= speed * delta;
-        }else{
+        } else {
             position.x += speed * delta;
         }
 
-        if(position.y > target.y){
+        if (position.y > target.y) {
             position.y -= speed * delta;
-        }else{
+        } else {
             position.y += speed * delta;
         }
 

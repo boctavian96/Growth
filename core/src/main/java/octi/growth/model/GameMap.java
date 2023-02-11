@@ -3,6 +3,7 @@ package octi.growth.model;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.ai.btree.BehaviorTree;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
@@ -10,8 +11,12 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Json;
 import octi.growth.Growth;
 import octi.growth.ai.Agent;
@@ -44,6 +49,8 @@ public class GameMap implements InputProcessor {
     Team playerTeam;
 
     Stage uiStage;
+    Skin uiSkin;
+    TextButton soundButton;
     GameEndWidget gameEndWidget;
 
     public GameMap(Growth game, GameplayScreenContext context, Stage uiStage) {
@@ -54,8 +61,41 @@ public class GameMap implements InputProcessor {
         create();
     }
 
-    private void create(){
+    private void create() {
         this.isGameFinished = false;
+
+        uiSkin = new Skin(Gdx.files.internal("ui/uiskin.json"));
+        soundButton = new TextButton("Mute", uiSkin);
+        soundButton.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                if ("Mute".equals(soundButton.getText().toString())) {
+                    soundButton.setText("Unmute");
+                    Preferences preferences = Gdx.app.getPreferences("preferences");
+                    preferences.putBoolean("muteMusic", true);
+                    preferences.putBoolean("muteSound", true);
+                    preferences.flush();
+                    game.muteSound();
+                } else {
+                    soundButton.setText("Mute");
+                    Preferences preferences = Gdx.app.getPreferences("preferences");
+                    preferences.putBoolean("muteMusic", false);
+                    preferences.putBoolean("muteSound", false);
+                    preferences.flush();
+                    game.muteSound();
+                }
+            }
+        });
+
+        /*
+        Table t = new Table();
+        t.setFillParent(true);
+        t.add(soundButton).width(80f).top().right();
+         */
+        soundButton.setPosition(700, 550);
+        soundButton.setWidth(80f);
+
+        uiStage.addActor(soundButton);
 
         StringBuilder mapPath = new StringBuilder("maps/");
         mapPath.append(context.getMapName());
@@ -121,8 +161,6 @@ public class GameMap implements InputProcessor {
         batch.end();
         uiStage.draw();
 
-
-
         //Draw Debug
         if (game.isDebugMode()) {
             time += dt;
@@ -157,15 +195,15 @@ public class GameMap implements InputProcessor {
         }
         uiStage.act(dt);
 
-        if(isGameFinished){
+        if (isGameFinished) {
             int status = gameEndWidget.getStatus();
 
-            if(status == 1){
+            if (status == 1) {
                 //Go to main menu.
                 game.setScreen(new MainMenuScreen(game));
             }
 
-            if(status == 2){
+            if (status == 2) {
                 //Restart level.
                 create();
             }
@@ -231,7 +269,7 @@ public class GameMap implements InputProcessor {
         sr.end();
     }
 
-    private void drawLine(ShapeRenderer sr, Vector2 startPosition, Vector2 destinationPositition){
+    private void drawLine(ShapeRenderer sr, Vector2 startPosition, Vector2 destinationPositition) {
         sr.begin(ShapeRenderer.ShapeType.Line);
         sr.setColor(Color.WHITE);
         sr.rectLine(startPosition, destinationPositition, 3);
@@ -258,7 +296,7 @@ public class GameMap implements InputProcessor {
     @Override
     public boolean keyUp(int keycode) {
         //Cheat code, for debugging purposes.
-        if(keycode == Input.Keys.K){
+        if (keycode == Input.Keys.K && game.isDebugMode()) {
             cells.forEach(cell -> cell.setTeam(playerTeam));
         }
         return false;
