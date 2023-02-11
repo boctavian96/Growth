@@ -5,5 +5,6 @@ public enum ScreenType {
     GAME_SELECTION_SCREEN,
     GAME,
     TUTORIAL,
-    MAP_EDITOR
+    MAP_EDITOR,
+    OPTIONS
 }

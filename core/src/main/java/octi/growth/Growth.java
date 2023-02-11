@@ -2,17 +2,19 @@ package octi.growth;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.Preferences;
+import com.badlogic.gdx.audio.Music;
 import octi.growth.platform.Platform;
 import octi.growth.screen.MainMenuScreen;
+
+import java.util.Optional;
 
 /**
  * {@link com.badlogic.gdx.ApplicationListener} implementation shared by all platforms.
  */
 public class Growth extends Game {
     private boolean debugMode = false;
-    private Sound sound;
-    private long id;
+    private Music music;
     private Platform platform;
 
     public Growth(Platform platform) {
@@ -21,9 +23,12 @@ public class Growth extends Game {
 
     @Override
     public void create() {
-        this.sound = Gdx.audio.newSound(Gdx.files.internal(Constants.BACKGROUND_MUSIC));
-        this.id = sound.play(0.7f); // play new sound and keep handle for further manipulation
-        sound.setLooping(id, true);
+        Preferences preferences = preparePreferences();
+
+        this.music = Gdx.audio.newMusic(Gdx.files.internal(Constants.BACKGROUND_MUSIC));
+        music.play();
+        music.setLooping(true);
+        music.setVolume(preferences.getFloat("musicVolume"));
         setScreen(new MainMenuScreen(this));
     }
 
@@ -38,4 +43,20 @@ public class Growth extends Game {
     public Platform getPlatform() {
         return this.platform;
     }
+
+    private Preferences preparePreferences() {
+        Preferences preferences = Gdx.app.getPreferences("preferences");
+        preferences.putFloat("musicVolume", 0.3f);
+        preferences.putFloat("soundVolume", 0.3f);
+        preferences.putBoolean("muteMusic", false);
+        preferences.putBoolean("muteSound", false);
+        preferences.flush();
+
+        return preferences;
+    }
+
+    public void setMusicVolume(float volume) {
+        music.setVolume(volume);
+    }
+
 }

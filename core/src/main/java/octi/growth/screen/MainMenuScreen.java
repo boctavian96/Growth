@@ -46,6 +46,7 @@ public class MainMenuScreen extends AbstractScreen {
         tutorialButton.addListener(new ChangeScreenEvent(game, ScreenType.TUTORIAL));
 
         TextButton optionsButton = new TextButton("Options", uiSkin);
+        optionsButton.addListener(new ChangeScreenEvent(game, ScreenType.OPTIONS));
 
         TextButton exitButton = new TextButton("Exit", uiSkin);
         exitButton.addListener(new ExitEvent());
@@ -55,8 +56,7 @@ public class MainMenuScreen extends AbstractScreen {
             table.add(mapEditorButton).row();
         }
         table.add(tutorialButton).row();
-        //Not yet implemented. :(
-        //table.add(optionsButton).row();
+        table.add(optionsButton).row();
         if (game.getPlatform().equals(Platform.DESKTOP)) {
             table.add(exitButton).row();
         }

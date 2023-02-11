@@ -10,19 +10,19 @@ public class ChangeScreenEvent extends ClickListener {
     private final Growth game;
     private GameplayScreenContext context;
 
-    public ChangeScreenEvent(Growth game, ScreenType targetScreen){
+    public ChangeScreenEvent(Growth game, ScreenType targetScreen) {
         this.game = game;
         this.targetScreen = targetScreen;
     }
 
-    public ChangeScreenEvent(Growth game, ScreenType targetScreen, GameplayScreenContext context){
+    public ChangeScreenEvent(Growth game, ScreenType targetScreen, GameplayScreenContext context) {
         this(game, targetScreen);
         this.context = context;
     }
 
     @Override
     public void clicked(InputEvent event, float x, float y) {
-        switch(targetScreen){
+        switch (targetScreen) {
             case GAME:
                 game.setScreen(new GameplayScreen(game, context));
                 break;
@@ -37,6 +37,9 @@ public class ChangeScreenEvent extends ClickListener {
                 break;
             case GAME_SELECTION_SCREEN:
                 game.setScreen(new GameSelectionScreen(game));
+                break;
+            case OPTIONS:
+                game.setScreen(new OptionsScreen(game));
                 break;
             default:
                 throw new IllegalArgumentException("Screen type doesnt exist, please check ScreenTypes.java");

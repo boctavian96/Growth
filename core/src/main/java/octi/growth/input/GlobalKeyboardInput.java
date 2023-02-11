@@ -10,13 +10,14 @@ public class GlobalKeyboardInput implements InputProcessor {
     private final Growth game;
     private final Camera camera;
 
-    public GlobalKeyboardInput(Growth game, Camera camera){
+    public GlobalKeyboardInput(Growth game, Camera camera) {
         this.game = game;
         this.camera = camera;
     }
 
     @Override
     public boolean keyDown(int keycode) {
+        /*
         if(keycode == Input.Keys.A){
             camera.translate(-5, 0, 0);
         }
@@ -32,19 +33,20 @@ public class GlobalKeyboardInput implements InputProcessor {
         if(keycode == Input.Keys.S){
             camera.translate(0, 5, 0);
         }
-
+         */
         return false;
     }
 
     @Override
     public boolean keyUp(int keycode) {
-        if(keycode == Input.Keys.Q){
+        if (keycode == Input.Keys.Q) {
             Gdx.app.exit();
         }
 
-        if(keycode == Input.Keys.F){
-            game.changeDebug();
-        }
+        //Remove comments when developing.
+//        if (keycode == Input.Keys.F) {
+//            game.changeDebug();
+//        }
 
         return false;
     }
