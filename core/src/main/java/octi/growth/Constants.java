@@ -10,7 +10,7 @@ public class Constants {
 
     //Sounds.
     public static final String BACKGROUND_MUSIC = "sounds/BGmusic.mp3";
-    public static final String LOSE_SOUND = "sounds/lose.mp3";
+    public static final String LOSE_SOUND = "sounds/planet_conquered.wav";
 
     //Movement groups.
 
