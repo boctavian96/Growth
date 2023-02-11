@@ -59,7 +59,7 @@ public class OptionsScreen extends AbstractScreen {
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
                 preferences.flush();
-
+                game.setScreen(new MainMenuScreen(game));
             }
         });
 
