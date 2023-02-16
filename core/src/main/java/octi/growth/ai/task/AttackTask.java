@@ -27,7 +27,7 @@ public class AttackTask extends LeafTask<Agent> {
             source = random.nextInt(ownedCells.size());
         }
 
-        //Select a random cell that he dont owns.
+        //Select a random cell that he don't own.
         List<Cell> randomCells = world.getMapCells().stream().filter(cell -> !cell.getTeam().equals(team)).collect(Collectors.toList());
         if(randomCells.isEmpty()){
             //Cannot attack anything...

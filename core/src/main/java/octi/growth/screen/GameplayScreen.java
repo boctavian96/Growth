@@ -14,14 +14,14 @@ import octi.growth.model.GameMap;
 
 /** First screen of the application. Displayed after the application is created. */
 public class GameplayScreen extends AbstractScreen {
-    private GameplayScreenContext context;
+    private final GameplayScreenContext context;
 
     private OrthographicCamera camera;
     private ShapeRenderer shapeRenderer;
     private SpriteBatch spriteBatch;
     private GameMap map;
 
-    private Stage uiStage;
+    private final Stage uiStage;
 
     private final InputMultiplexer inputMultiplexer;
 

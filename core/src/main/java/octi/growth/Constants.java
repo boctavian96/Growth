@@ -23,7 +23,7 @@ public class Constants {
     public static final String MEDIUM_AI = "ai/normalAI.tree";
     public static final String HARD_AI = "ai/hardAI.tree";
 
-    //Preferences Keys.
+    //Preference Keys.
     public static final String PREFERENCES = "preferences";
 
     public static final String MUSIC_VOLUME = "musicVolume";

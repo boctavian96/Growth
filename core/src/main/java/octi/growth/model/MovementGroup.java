@@ -13,13 +13,13 @@ import static octi.growth.Constants.*;
 public class MovementGroup {
 
     private boolean isAlive;
-    private Team team;
+    private final Team team;
     private int strength;
-    private Circle collisionCircle;
-    private float speed;
+    private final Circle collisionCircle;
+    private final float speed;
     private int damage;
-    private Vector2 position;
-    private Cell target;
+    private final Vector2 position;
+    private final Cell target;
     Sound sound = Gdx.audio.newSound(Gdx.files.internal(Constants.LOSE_SOUND));
 
 

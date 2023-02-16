@@ -42,7 +42,7 @@ public class ChangeScreenEvent extends ClickListener {
                 game.setScreen(new OptionsScreen(game));
                 break;
             default:
-                throw new IllegalArgumentException("Screen type doesnt exist, please check ScreenTypes.java");
+                throw new IllegalArgumentException("Screen type doesn't exist, please check ScreenTypes.java");
         }
         super.clicked(event, x, y);
     }

@@ -14,16 +14,16 @@ public class Agent {
     public String name;
     public String brainLog;
 
-    private BehaviorTree<Agent> behaviorTree;
-    private AgentWorld world;
+    private final BehaviorTree<Agent> behaviorTree;
+    private final AgentWorld world;
     private float timer;
     private boolean isAlive;
 
     //Hardcode for testing purpose;
-    private Team team;
+    private final Team team;
 
     //Can this be remade???
-    private GameMap api;
+    private final GameMap api;
 
     List<MovementGroup> movementGroups;
 
@@ -97,7 +97,7 @@ public class Agent {
             log("Im attacking");
             timer = 0;
 
-            //Spawn a attack to a random cell that he dont owns.
+            //Spawn an attack to a random cell that he don't own.
             MovementGroup mg = api.spawnMovementGroup(source, target);
             movementGroups.add(mg);
         }

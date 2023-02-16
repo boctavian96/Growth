@@ -15,7 +15,7 @@ import static octi.growth.Constants.*;
 public class Growth extends Game {
     private boolean debugMode = false;
     private Music music;
-    private Platform platform;
+    private final Platform platform;
 
     public Growth(Platform platform) {
         this.platform = platform;

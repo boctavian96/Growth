@@ -11,8 +11,8 @@ public class TutorialWidget extends Table {
     private final Growth game;
     private int tutorialState = 0;
 
-    private Window tutorialWidget;
-    private Label label;
+    private final Window tutorialWidget;
+    private final Label label;
     TextButton nextButton;
     TextButton backButton;
 

@@ -270,10 +270,10 @@ public class GameMap implements InputProcessor {
         sr.end();
     }
 
-    private void drawLine(ShapeRenderer sr, Vector2 startPosition, Vector2 destinationPositition) {
+    private void drawLine(ShapeRenderer sr, Vector2 startPosition, Vector2 destinationPosition) {
         sr.begin(ShapeRenderer.ShapeType.Line);
         sr.setColor(Color.WHITE);
-        sr.rectLine(startPosition, destinationPositition, 3);
+        sr.rectLine(startPosition, destinationPosition, 3);
         sr.end();
     }
 

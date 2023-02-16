@@ -18,17 +18,17 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class GamePreferencesWidget extends WidgetGroup {
-    private Growth game;
-    private GameplayScreenContext context;
+    private final Growth game;
+    private final GameplayScreenContext context;
 
-    private SelectBox<String> difficultyBox;
-    private SelectBox<String> mapNameBox;
-    private SelectBox<String> playerColorBox;
-    private CheckBox aiBrawl;
-    private TextButton backButton;
-    private TextButton playButton;
+    private final SelectBox<String> difficultyBox;
+    private final SelectBox<String> mapNameBox;
+    private final SelectBox<String> playerColorBox;
+    private final CheckBox aiBrawl;
+    private final TextButton backButton;
+    private final TextButton playButton;
 
-    private Map<String, String> maps;
+    private final Map<String, String> maps;
 
 
     public GamePreferencesWidget(Skin uiSkin, Growth game) {
