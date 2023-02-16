@@ -12,6 +12,8 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import octi.growth.Growth;
 import octi.growth.input.ChangeScreenEvent;
 
+import static octi.growth.Constants.*;
+
 public class OptionsScreen extends AbstractScreen {
 
     private Stage stage;
@@ -26,28 +28,28 @@ public class OptionsScreen extends AbstractScreen {
         super.show();
         stage = new Stage();
 
-        preferences = Gdx.app.getPreferences("preferences");
+        preferences = Gdx.app.getPreferences(PREFERENCES);
 
         Gdx.input.setInputProcessor(stage);
         Skin uiSkin = loadSkin();
 
         Slider musicSlider = new Slider(0f, 1f, 0.05f, false, uiSkin);
-        musicSlider.setVisualPercent(preferences.getFloat("musicVolume"));
+        musicSlider.setVisualPercent(preferences.getFloat(MUSIC_VOLUME));
         musicSlider.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                preferences.putFloat("musicVolume", musicSlider.getValue());
+                preferences.putFloat(MUSIC_VOLUME, musicSlider.getValue());
                 game.setMusicVolume(musicSlider.getValue());
             }
         });
 
 
         Slider soundSlider = new Slider(0f, 1f, 0.05f, false, uiSkin);
-        soundSlider.setVisualPercent(preferences.getFloat("soundVolume"));
+        soundSlider.setVisualPercent(preferences.getFloat(SOUND_VOLUME));
         soundSlider.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                preferences.putFloat("soundVolume", soundSlider.getValue());
+                preferences.putFloat(SOUND_VOLUME, soundSlider.getValue());
             }
         });
 

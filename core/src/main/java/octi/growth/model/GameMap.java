@@ -217,10 +217,10 @@ public class GameMap implements InputProcessor {
 
             if (isTheGameFinished) {
                 if (cells.get(0).getTeam().equals(playerTeam)) {
-                    gameEndWidget = new GameEndWidget("Status", new Skin(Gdx.files.internal("ui/uiskin.json")), true);
+                    gameEndWidget = new GameEndWidget("", new Skin(Gdx.files.internal("ui/uiskin.json")), true);
                     Gdx.app.log("Victory", "Player has won!");
                 } else {
-                    gameEndWidget = new GameEndWidget("Status", new Skin(Gdx.files.internal("ui/uiskin.json")), false);
+                    gameEndWidget = new GameEndWidget("", new Skin(Gdx.files.internal("ui/uiskin.json")), false);
                     Gdx.app.log("Loss", "Player has lost");
                 }
 

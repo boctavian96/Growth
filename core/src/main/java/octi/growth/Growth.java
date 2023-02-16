@@ -9,6 +9,8 @@ import octi.growth.screen.MainMenuScreen;
 
 import java.util.Optional;
 
+import static octi.growth.Constants.*;
+
 /**
  * {@link com.badlogic.gdx.ApplicationListener} implementation shared by all platforms.
  */
@@ -25,10 +27,10 @@ public class Growth extends Game {
     public void create() {
         Preferences preferences = preparePreferences();
 
-        this.music = Gdx.audio.newMusic(Gdx.files.internal(Constants.BACKGROUND_MUSIC));
+        this.music = Gdx.audio.newMusic(Gdx.files.internal(BACKGROUND_MUSIC));
         music.play();
         music.setLooping(true);
-        music.setVolume(preferences.getFloat("musicVolume"));
+        music.setVolume(preferences.getFloat(MUSIC_VOLUME));
         setScreen(new MainMenuScreen(this));
     }
 
@@ -45,11 +47,11 @@ public class Growth extends Game {
     }
 
     private Preferences preparePreferences() {
-        Preferences preferences = Gdx.app.getPreferences("preferences");
-        preferences.putFloat("musicVolume", 0.2f);
-        preferences.putFloat("soundVolume", 0.2f);
-        preferences.putBoolean("muteMusic", false);
-        preferences.putBoolean("muteSound", false);
+        Preferences preferences = Gdx.app.getPreferences(PREFERENCES);
+        preferences.putFloat(MUSIC_VOLUME, 0.2f);
+        preferences.putFloat(SOUND_VOLUME, 0.2f);
+        preferences.putBoolean(MUTE_MUSIC, false);
+        preferences.putBoolean(MUTE_SOUND, false);
         preferences.flush();
 
         return preferences;
@@ -60,9 +62,9 @@ public class Growth extends Game {
     }
 
     public void muteSound() {
-        Preferences preferences = Gdx.app.getPreferences("preferences");
+        Preferences preferences = Gdx.app.getPreferences(PREFERENCES);
 
-        boolean isMusicMuted = preferences.getBoolean("muteMusic");
+        boolean isMusicMuted = preferences.getBoolean(MUTE_MUSIC);
 
         if (isMusicMuted) {
             music.pause();

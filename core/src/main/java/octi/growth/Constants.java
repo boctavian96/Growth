@@ -1,5 +1,9 @@
 package octi.growth;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class Constants {
 
     //Textures.
@@ -19,7 +23,11 @@ public class Constants {
     public static final String MEDIUM_AI = "ai/normalAI.tree";
     public static final String HARD_AI = "ai/hardAI.tree";
 
+    //Preferences Keys.
+    public static final String PREFERENCES = "preferences";
 
-    private Constants() {
-    }
+    public static final String MUSIC_VOLUME = "musicVolume";
+    public static final String SOUND_VOLUME = "soundVolume";
+    public static final String MUTE_MUSIC = "muteMusic";
+    public static final String MUTE_SOUND = "muteSound";
 }

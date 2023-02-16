@@ -24,6 +24,7 @@ configure(subprojects) {
   sourceCompatibility = 1.8
   compileJava {
     options.incremental = true
+
   }
 }
 
