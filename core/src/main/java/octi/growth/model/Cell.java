@@ -67,7 +67,7 @@ public class Cell {
     /**
      * Draws the circle at half of alpha. Use only on the map editor.
      *
-     * @param sr
+     * @param sr Shape Renderer used for debugging purposes.
      */
     public void drawGhost(ShapeRenderer sr) {
         Color ghostColor = team.color;

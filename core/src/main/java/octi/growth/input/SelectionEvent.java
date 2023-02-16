@@ -7,12 +7,12 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 public class SelectionEvent extends ChangeListener {
     private String objReference;
 
-    public SelectionEvent(String select){
+    public SelectionEvent(String select) {
         this.objReference = select;
     }
 
     @Override
     public void changed(ChangeEvent event, Actor actor) {
-        objReference = (String)((SelectBox) actor).getSelected();
+        objReference = ((SelectBox<String>) actor).getSelected();
     }
 }

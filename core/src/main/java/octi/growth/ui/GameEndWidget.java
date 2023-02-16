@@ -10,8 +10,8 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 public class GameEndWidget extends Window {
     private int status = 0;
 
-    TextButton back;
-    TextButton restart;
+    final TextButton back;
+    final TextButton restart;
 
     public GameEndWidget(String title, Skin skin, boolean playerWon) {
         super(title, skin);
@@ -57,7 +57,7 @@ public class GameEndWidget extends Window {
         });
     }
 
-    public int getStatus(){
+    public int getStatus() {
         return this.status;
     }
 }

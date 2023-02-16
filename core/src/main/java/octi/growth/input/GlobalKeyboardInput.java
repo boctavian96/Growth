@@ -17,23 +17,6 @@ public class GlobalKeyboardInput implements InputProcessor {
 
     @Override
     public boolean keyDown(int keycode) {
-        /*
-        if(keycode == Input.Keys.A){
-            camera.translate(-5, 0, 0);
-        }
-
-        if(keycode == Input.Keys.D){
-            camera.translate(5, 0, 0);
-        }
-
-        if(keycode == Input.Keys.W){
-            camera.translate(0, -5, 0);
-        }
-
-        if(keycode == Input.Keys.S){
-            camera.translate(0, 5, 0);
-        }
-         */
         return false;
     }
 
@@ -42,12 +25,6 @@ public class GlobalKeyboardInput implements InputProcessor {
         if (keycode == Input.Keys.Q) {
             Gdx.app.exit();
         }
-
-        //Remove comments when developing.
-//        if (keycode == Input.Keys.F) {
-//            game.changeDebug();
-//        }
-
         return false;
     }
 

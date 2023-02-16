@@ -11,11 +11,11 @@ import octi.growth.ecs.component.PositionComponent;
 
 public class GraphicSystem extends IteratingSystem {
 
-    private SpriteBatch batch;
-    private Array<Entity> renderQueue;
+    private final SpriteBatch batch;
+    private final Array<Entity> renderQueue;
 
-    private ComponentMapper<PositionComponent> pm = ComponentMapper.getFor(PositionComponent.class);
-    private ComponentMapper<GraphicComponent> gm = ComponentMapper.getFor(GraphicComponent.class);
+    private final ComponentMapper<PositionComponent> pm = ComponentMapper.getFor(PositionComponent.class);
+    private final ComponentMapper<GraphicComponent> gm = ComponentMapper.getFor(GraphicComponent.class);
 
     public GraphicSystem(SpriteBatch batch) {
         super(Family.all(PositionComponent.class, GraphicComponent.class).get());

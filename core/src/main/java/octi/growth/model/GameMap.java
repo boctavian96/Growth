@@ -47,7 +47,7 @@ public class GameMap extends InputAdapter {
 
     Team playerTeam;
 
-    Stage uiStage;
+    final Stage uiStage;
     Skin uiSkin;
     TextButton soundButton;
     GameEndWidget gameEndWidget;
@@ -91,10 +91,9 @@ public class GameMap extends InputAdapter {
 
         uiStage.addActor(soundButton);
 
-        StringBuilder mapPath = new StringBuilder("maps/");
-        mapPath.append(context.getMapName());
+        String mapPath = "maps/" + context.getMapName();
 
-        FileHandle fh = Gdx.files.internal(mapPath.toString());
+        FileHandle fh = Gdx.files.internal(mapPath);
         String jsonString = fh.readString();
 
         playerTeam = context.getPlayerTeam();
@@ -273,8 +272,8 @@ public class GameMap extends InputAdapter {
         List<Agent> agents = new ArrayList<>();
         for (Team t : availableTeams) {
             String agentName = "Agent " + Math.random();
-            //BehaviorTree<Agent> behaviorTree = BehaviorTreeCreator.createBehaviorTree(EASY_AI, agentName);
-            BehaviorTree<Agent> behaviorTree = BehaviorTreeCreator.createBehaviorTree(agentName);
+            BehaviorTree<Agent> behaviorTree = BehaviorTreeCreator.createBehaviorTree(EASY_AI, agentName);
+            //BehaviorTree<Agent> behaviorTree = BehaviorTreeCreator.createBehaviorTree(agentName);
             AgentWorld world = new AgentWorld(cells, movementGroups);
             agents.add(new Agent(agentName, behaviorTree, world, this, t));
         }

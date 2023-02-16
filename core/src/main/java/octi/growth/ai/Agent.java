@@ -11,7 +11,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class Agent {
-    public String name;
+    public final String name;
     public String brainLog;
 
     private final BehaviorTree<Agent> behaviorTree;
@@ -74,9 +74,7 @@ public class Agent {
 
             //Select a random cell that agent owns.
             List<Cell> ownedCells = world.getMapCells().stream().filter(cell -> cell.getTeam().equals(team)).collect(Collectors.toList());
-            if (ownedCells.size() == 1) {
-                //Nothing to reinforce...
-            } else {
+            if (ownedCells.size() > 1) {
                 //Select random source
                 Random random = new Random();
                 int source = random.nextInt(ownedCells.size());

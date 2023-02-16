@@ -34,8 +34,8 @@ public class MapEditorScreen extends AbstractScreen implements InputProcessor {
     private String cellSize;
     private String team;
 
-    private SelectBox cellPicker;
-    private SelectBox teamPicker;
+    private SelectBox<String> cellPicker;
+    private SelectBox<String> teamPicker;
     private Window window;
 
     private ArrayList<Cell> generatedCells;
@@ -62,7 +62,7 @@ public class MapEditorScreen extends AbstractScreen implements InputProcessor {
         TextButton backButton = new TextButton("Back", uiSkin);
         backButton.addListener(new ChangeScreenEvent(game, ScreenType.MAIN_MENU));
 
-        cellPicker = new SelectBox(uiSkin);
+        cellPicker = new SelectBox<>(uiSkin);
         Array<String> items = new Array<>();
         items.add("Large Cell");
         items.add("Medium Cell");
@@ -70,7 +70,7 @@ public class MapEditorScreen extends AbstractScreen implements InputProcessor {
         cellPicker.setItems(items);
         cellPicker.addListener(new SelectionEvent(cellSize));
 
-        teamPicker = new SelectBox(uiSkin);
+        teamPicker = new SelectBox<>(uiSkin);
         Array<String> teams = new Array<>();
         teams.add("Red");
         teams.add("Green");
@@ -161,8 +161,8 @@ public class MapEditorScreen extends AbstractScreen implements InputProcessor {
     }
 
     public void update() {
-        team = (String) teamPicker.getSelected();
-        cellSize = (String) cellPicker.getSelected();
+        team = teamPicker.getSelected();
+        cellSize = cellPicker.getSelected();
 
         ghostCell.setTeam(getTeam(team));
         ghostCell.setType(getType(cellSize));
@@ -225,6 +225,7 @@ public class MapEditorScreen extends AbstractScreen implements InputProcessor {
     @Override
     public void dispose() {
         super.dispose();
+        uiStage.dispose();
     }
 
     @Override

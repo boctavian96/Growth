@@ -45,12 +45,12 @@ public class GamePreferencesWidget extends WidgetGroup {
             //Desktop Configuration.
             listOfFiles = Gdx.files.internal("assets/maps/").list();
         }
-        for (int i = 0; i < listOfFiles.length; i++) {
+        for (var fileHandle : listOfFiles) {
             Json json = new Json();
             json.setOutputType(JsonWriter.OutputType.json);
-            MapModel gameMap = json.fromJson(MapModel.class, listOfFiles[i].readString());
+            MapModel gameMap = json.fromJson(MapModel.class, fileHandle.readString());
             if (!gameMap.getMapName().equals("tutorial")) {
-                maps.put(gameMap.getMapName(), listOfFiles[i].name());
+                maps.put(gameMap.getMapName(), fileHandle.name());
             }
         }
 
@@ -59,13 +59,13 @@ public class GamePreferencesWidget extends WidgetGroup {
         table.defaults().width(100);
         table.setFillParent(true);
 
-        difficultyBox = new SelectBox(uiSkin);
+        difficultyBox = new SelectBox<>(uiSkin);
         difficultyBox.setItems("Easy", "Medium", "Hard");
 
-        mapNameBox = new SelectBox(uiSkin);
+        mapNameBox = new SelectBox<>(uiSkin);
         mapNameBox.setItems(getMapNames(maps));
 
-        playerColorBox = new SelectBox(uiSkin);
+        playerColorBox = new SelectBox<>(uiSkin);
         playerColorBox.setItems("Red", "Green", "Cyan", "Yellow", "Orange");
 
         aiBrawl = new CheckBox("AI Battle Royal", uiSkin);

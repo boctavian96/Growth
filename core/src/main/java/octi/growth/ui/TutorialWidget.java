@@ -13,8 +13,8 @@ public class TutorialWidget extends Table {
 
     private final Window tutorialWidget;
     private final Label label;
-    TextButton nextButton;
-    TextButton backButton;
+    private final TextButton nextButton;
+    private final TextButton backButton;
 
     public TutorialWidget(Growth game, Skin uiSkin) {
         this.game = game;
