@@ -17,7 +17,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Json;
-import octi.growth.Constants;
 import octi.growth.Growth;
 import octi.growth.ai.Agent;
 import octi.growth.ai.AgentWorld;
@@ -28,6 +27,7 @@ import octi.growth.ui.GameEndWidget;
 
 import java.util.*;
 
+import static octi.growth.Constants.EASY_AI;
 import static octi.growth.Constants.UI_SKIN;
 
 public class GameMap implements InputProcessor {
@@ -214,7 +214,7 @@ public class GameMap implements InputProcessor {
 
     private boolean checkWin() {
         if (!context.isAiBattle()) {
-            //If only one color on the board its a win.
+            //If only one color on the board it's a win.
             boolean isTheGameFinished = cells.stream().map(Cell::getTeam).distinct().limit(2).count() <= 1;
 
             if (isTheGameFinished) {
@@ -281,7 +281,7 @@ public class GameMap implements InputProcessor {
         List<Agent> agents = new ArrayList<>();
         for (Team t : availableTeams) {
             String agentName = "Agent " + Math.random();
-            //BehaviorTree<Agent> behaviorTree = BehaviorTreeCreator.createBehaviorTree("ai/basicAI.tree", agentName);
+            //BehaviorTree<Agent> behaviorTree = BehaviorTreeCreator.createBehaviorTree(EASY_AI, agentName);
             BehaviorTree<Agent> behaviorTree = BehaviorTreeCreator.createBehaviorTree(agentName);
             AgentWorld world = new AgentWorld(cells, movementGroups);
             agents.add(new Agent(agentName, behaviorTree, world, this, t));
