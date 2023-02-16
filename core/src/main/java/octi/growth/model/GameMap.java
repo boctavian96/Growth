@@ -1,9 +1,6 @@
 package octi.growth.model;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
-import com.badlogic.gdx.InputProcessor;
-import com.badlogic.gdx.Preferences;
+import com.badlogic.gdx.*;
 import com.badlogic.gdx.ai.btree.BehaviorTree;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
@@ -30,7 +27,7 @@ import java.util.*;
 import static octi.growth.Constants.EASY_AI;
 import static octi.growth.Constants.UI_SKIN;
 
-public class GameMap implements InputProcessor {
+public class GameMap extends InputAdapter {
     private final GameplayScreenContext context;
 
     private boolean isGameFinished;
@@ -89,11 +86,6 @@ public class GameMap implements InputProcessor {
             }
         });
 
-        /*
-        Table t = new Table();
-        t.setFillParent(true);
-        t.add(soundButton).width(80f).top().right();
-         */
         soundButton.setPosition(700, 550);
         soundButton.setWidth(80f);
 
@@ -290,21 +282,11 @@ public class GameMap implements InputProcessor {
     }
 
     @Override
-    public boolean keyDown(int keycode) {
-        return false;
-    }
-
-    @Override
     public boolean keyUp(int keycode) {
         //Cheat code, for debugging purposes.
         if (keycode == Input.Keys.K && game.isDebugMode()) {
             cells.forEach(cell -> cell.setTeam(playerTeam));
         }
-        return false;
-    }
-
-    @Override
-    public boolean keyTyped(char character) {
         return false;
     }
 
@@ -344,26 +326,6 @@ public class GameMap implements InputProcessor {
             }
         }
 
-        return false;
-    }
-
-    @Override
-    public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-        return false;
-    }
-
-    @Override
-    public boolean touchDragged(int screenX, int screenY, int pointer) {
-        return false;
-    }
-
-    @Override
-    public boolean mouseMoved(int screenX, int screenY) {
-        return false;
-    }
-
-    @Override
-    public boolean scrolled(float amountX, float amountY) {
         return false;
     }
 }
