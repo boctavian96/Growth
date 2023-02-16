@@ -27,14 +27,14 @@ public class Agent {
 
     List<MovementGroup> movementGroups;
 
-    public Agent(String name){
+    public Agent(String name) {
         this(name, null, null, null, null);
     }
 
-    public Agent(String name, BehaviorTree<Agent> behaviorTree, AgentWorld world, GameMap map, Team agentTeam){
+    public Agent(String name, BehaviorTree<Agent> behaviorTree, AgentWorld world, GameMap map, Team agentTeam) {
         this.name = name;
         this.behaviorTree = behaviorTree;
-        if(Objects.nonNull(behaviorTree)){
+        if (Objects.nonNull(behaviorTree)) {
             this.behaviorTree.setObject(this);
         }
         this.world = world;
@@ -43,9 +43,9 @@ public class Agent {
         this.team = agentTeam;
     }
 
-    public void update(float delta, List<Cell> mapCells, List<MovementGroup> movementGroups){
+    public void update(float delta, List<Cell> mapCells, List<MovementGroup> movementGroups) {
         isAlive = checkAlive();
-        if(isAlive) {
+        if (isAlive) {
             behaviorTree.step();
             timer += delta;
             world.setMapCells(mapCells);
@@ -53,37 +53,36 @@ public class Agent {
         }
     }
 
-    public List<MovementGroup> fetch(){
+    public List<MovementGroup> fetch() {
         List<MovementGroup> movementGroupsCopy = new ArrayList<>(movementGroups);
         movementGroups = new ArrayList<>();
         return movementGroupsCopy;
     }
 
-    public void idle(){
-        if(timer > 2) {
+    public void idle() {
+        if (timer > 2) {
             //Agent never waits...
             log("Im waiting.");
             timer = 0;
         }
     }
 
-    public void reinforce(){
-        if(timer > 2) {
+    public void reinforce() {
+        if (timer > 2) {
             log("Im reinforcing");
             timer = 0;
 
             //Select a random cell that agent owns.
             List<Cell> ownedCells = world.getMapCells().stream().filter(cell -> cell.getTeam().equals(team)).collect(Collectors.toList());
-            if(ownedCells.size() == 1){
+            if (ownedCells.size() == 1) {
                 //Nothing to reinforce...
-                return;
-            }else{
+            } else {
                 //Select random source
                 Random random = new Random();
                 int source = random.nextInt(ownedCells.size());
                 int target = random.nextInt(ownedCells.size());
 
-                if(source == target){
+                if (source == target) {
                     //Failed to reinforce.
                     return;
                 }
@@ -93,8 +92,8 @@ public class Agent {
         }
     }
 
-    public void attack(Cell source, Cell target){
-        if(timer > 2) {
+    public void attack(Cell source, Cell target) {
+        if (timer > 2) {
             log("Im attacking");
             timer = 0;
 
@@ -104,19 +103,19 @@ public class Agent {
         }
     }
 
-    private boolean checkAlive(){
+    private boolean checkAlive() {
         return world.getMapCells().stream().anyMatch(cell -> cell.getTeam().equals(team));
     }
 
-    public AgentWorld getWorld(){
+    public AgentWorld getWorld() {
         return this.world;
     }
 
-    public Team getTeam(){
+    public Team getTeam() {
         return this.team;
     }
 
-    public void log(String msg){
+    public void log(String msg) {
         GdxAI.getLogger().info("Agent: " + name, msg);
     }
 }

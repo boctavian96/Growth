@@ -14,10 +14,10 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Json;
+import octi.growth.Constants;
 import octi.growth.Growth;
 import octi.growth.ai.Agent;
 import octi.growth.ai.AgentWorld;
@@ -27,6 +27,8 @@ import octi.growth.screen.MainMenuScreen;
 import octi.growth.ui.GameEndWidget;
 
 import java.util.*;
+
+import static octi.growth.Constants.UI_SKIN;
 
 public class GameMap implements InputProcessor {
     private final GameplayScreenContext context;
@@ -213,14 +215,14 @@ public class GameMap implements InputProcessor {
     private boolean checkWin() {
         if (!context.isAiBattle()) {
             //If only one color on the board its a win.
-            boolean isTheGameFinished = cells.stream().map(cell -> cell.getTeam()).distinct().limit(2).count() <= 1;
+            boolean isTheGameFinished = cells.stream().map(Cell::getTeam).distinct().limit(2).count() <= 1;
 
             if (isTheGameFinished) {
                 if (cells.get(0).getTeam().equals(playerTeam)) {
-                    gameEndWidget = new GameEndWidget("", new Skin(Gdx.files.internal("ui/uiskin.json")), true);
+                    gameEndWidget = new GameEndWidget("", new Skin(Gdx.files.internal(UI_SKIN)), true);
                     Gdx.app.log("Victory", "Player has won!");
                 } else {
-                    gameEndWidget = new GameEndWidget("", new Skin(Gdx.files.internal("ui/uiskin.json")), false);
+                    gameEndWidget = new GameEndWidget("", new Skin(Gdx.files.internal(UI_SKIN)), false);
                     Gdx.app.log("Loss", "Player has lost");
                 }
 
@@ -234,7 +236,6 @@ public class GameMap implements InputProcessor {
     public MovementGroup spawnMovementGroup(Cell sourceCell, Cell targetCell) {
         int resources = sourceCell.getResources();
         sourceCell.setResources(0);
-        sourceCell.getTeam();
 
         //Create attack group.
         return new MovementGroup(sourceCell.getTeam(), resources, sourceCell.getPosition(), targetCell);
@@ -319,7 +320,7 @@ public class GameMap implements InputProcessor {
                     //Set last clicked cell to selected, deselect previous selected cell
                     if (sourceCell != null) {
                         cells.stream()
-                            .filter(playerCell -> playerCell.isSelected() == true).findFirst()
+                            .filter(Cell::isSelected).findFirst()
                             .ifPresent(playerCell -> playerCell.setSelected(false));
                     }
                     cell.setSelected(true);

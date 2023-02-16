@@ -109,9 +109,7 @@ public class GamePreferencesWidget extends WidgetGroup {
 
     private Array<String> getMapNames(Map<String, String> map) {
         Array<String> mapNames = new Array<>();
-        map.forEach((k, v) -> {
-            mapNames.add(k);
-        });
+        map.forEach((k, v) -> mapNames.add(k));
         return mapNames;
     }
 }

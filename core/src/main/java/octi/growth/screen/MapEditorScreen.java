@@ -137,7 +137,7 @@ public class MapEditorScreen extends AbstractScreen implements InputProcessor {
 
         Table table = new Table();
         table.setFillParent(true);
-        table.defaults().width(100).pad(5);;
+        table.defaults().width(100).pad(5);
 
         table.add(backButton).expandX().left();
         table.add(cellPicker).width(120);
@@ -160,7 +160,7 @@ public class MapEditorScreen extends AbstractScreen implements InputProcessor {
         super.show();
     }
 
-    public void update(){
+    public void update() {
         team = (String) teamPicker.getSelected();
         cellSize = (String) cellPicker.getSelected();
 
@@ -176,7 +176,7 @@ public class MapEditorScreen extends AbstractScreen implements InputProcessor {
         Gdx.gl.glEnable(GL20.GL_BLEND);
         Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-        if(!window.isVisible()) {
+        if (!window.isVisible()) {
             ghostCell.drawGhost(shapeRenderer);
         }
         shapeRenderer.end();
@@ -190,24 +190,35 @@ public class MapEditorScreen extends AbstractScreen implements InputProcessor {
         uiStage.draw();
     }
 
-    private Team getTeam(String color){
-        switch (color){
-            case "Red": return Team.RED;
-            case "Green": return Team.GREEN;
-            case "Yellow": return Team.YELLOW;
-            case "Cyan": return Team.CYAN;
-            case "Orange": return Team.ORANGE;
-            case "Neutral": return Team.NEUTRAL;
-            default: throw new IllegalArgumentException("Invalid Color!");
+    private Team getTeam(String color) {
+        switch (color) {
+            case "Red":
+                return Team.RED;
+            case "Green":
+                return Team.GREEN;
+            case "Yellow":
+                return Team.YELLOW;
+            case "Cyan":
+                return Team.CYAN;
+            case "Orange":
+                return Team.ORANGE;
+            case "Neutral":
+                return Team.NEUTRAL;
+            default:
+                throw new IllegalArgumentException("Invalid Color!");
         }
     }
 
-    private CellType getType(String type){
-        switch (type){
-            case "Large Cell": return CellType.LARGE_CELL;
-            case "Medium Cell": return CellType.MEDIUM_CELL;
-            case "Small Cell": return CellType.SMALL_CELL;
-            default: throw new IllegalArgumentException("In existent Cell");
+    private CellType getType(String type) {
+        switch (type) {
+            case "Large Cell":
+                return CellType.LARGE_CELL;
+            case "Medium Cell":
+                return CellType.MEDIUM_CELL;
+            case "Small Cell":
+                return CellType.SMALL_CELL;
+            default:
+                throw new IllegalArgumentException("In existent Cell");
         }
     }
 
@@ -241,7 +252,7 @@ public class MapEditorScreen extends AbstractScreen implements InputProcessor {
         int revertedY = Gdx.graphics.getHeight() - screenY;
         Vector2 touchPoint = new Vector2(screenX, revertedY);
 
-        if(revertedY < Gdx.graphics.getHeight() * 0.85 && !window.isVisible()) {
+        if (revertedY < Gdx.graphics.getHeight() * 0.85 && !window.isVisible()) {
             if (button == Input.Buttons.LEFT) {
                 //Place a Cell.
                 Cell newCell = new Cell(touchPoint, ghostCell.getType(), ghostCell.getTeam());
@@ -256,7 +267,7 @@ public class MapEditorScreen extends AbstractScreen implements InputProcessor {
             }
         }
 
-        if(button == Input.Buttons.RIGHT){
+        if (button == Input.Buttons.RIGHT) {
             List<Cell> markedCells = generatedCells.stream().filter(cell -> cell.getCollisionCircle().contains(touchPoint)).collect(Collectors.toList());
             generatedCells.removeAll(markedCells);
             //Delete a Cell.
@@ -274,7 +285,7 @@ public class MapEditorScreen extends AbstractScreen implements InputProcessor {
         int revertedY = Gdx.graphics.getHeight() - screenY;
 
         //Check for upper bounds.
-        if(revertedY < Gdx.graphics.getHeight() * 0.85) {
+        if (revertedY < Gdx.graphics.getHeight() * 0.85) {
             ghostCell.setPosition(new Vector2(screenX, revertedY));
         }
         return false;

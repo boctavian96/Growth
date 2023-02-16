@@ -7,8 +7,6 @@ import com.badlogic.gdx.audio.Music;
 import octi.growth.platform.Platform;
 import octi.growth.screen.MainMenuScreen;
 
-import java.util.Optional;
-
 import static octi.growth.Constants.*;
 
 /**

@@ -40,7 +40,7 @@ public class GameplayScreenContext {
         this.aiBattle = aiBattle;
     }
 
-    public static final GameplayScreenContext tutorialContext(){
+    public static GameplayScreenContext tutorialContext() {
         GameplayScreenContext ctx = new GameplayScreenContext();
         ctx.setAiBattle(false);
         ctx.setPlayerTeam(Team.RED);

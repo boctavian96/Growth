@@ -12,20 +12,19 @@ import octi.growth.ai.task.ReinforceTask;
 import java.io.Reader;
 
 public class BehaviorTreeCreator {
-    public static BehaviorTree<Agent> createBehaviorTree(String policy, String agentName){
+    public static BehaviorTree<Agent> createBehaviorTree(String policy, String agentName) {
         Reader reader = null;
 
         try {
             reader = Gdx.files.internal(policy).reader();
             BehaviorTreeParser<Agent> parser = new BehaviorTreeParser<>();
-            BehaviorTree<Agent> tree = parser.parse(reader, new Agent(agentName));
-            return tree;
+            return parser.parse(reader, new Agent(agentName));
         } finally {
             StreamUtils.closeQuietly(reader);
         }
     }
 
-    public static BehaviorTree<Agent> createBehaviorTree(String agentName){
+    public static BehaviorTree<Agent> createBehaviorTree(String agentName) {
         BehaviorTree<Agent> tree = new BehaviorTree<>();
 
         RandomSelector<Agent> randomSelector = new RandomSelector<>();

@@ -5,11 +5,10 @@ import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Circle;
-import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import octi.growth.Constants;
-import octi.growth.model.CellType;
-import octi.growth.model.Team;
+
+import static octi.growth.Constants.*;
 
 public class MovementGroup {
 
@@ -60,13 +59,11 @@ public class MovementGroup {
     }
 
     private void playSound() {
-        Preferences preferences = Gdx.app.getPreferences("preferences");
-        boolean isSoundMuted = preferences.getBoolean("muteSound");
+        Preferences preferences = Gdx.app.getPreferences(PREFERENCES);
+        boolean isSoundMuted = preferences.getBoolean(MUTE_SOUND);
 
-        if (isSoundMuted) {
-            return;
-        } else {
-            float soundVolume = preferences.getFloat("soundVolume");
+        if (!isSoundMuted) {
+            float soundVolume = preferences.getFloat(SOUND_VOLUME);
             sound.play(soundVolume);
         }
     }
