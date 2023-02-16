@@ -7,7 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 public class ExitEvent extends ClickListener {
     @Override
     public void clicked(InputEvent event, float x, float y) {
-        Gdx.app.exit();
         super.clicked(event, x, y);
+        Gdx.app.exit();
     }
 }

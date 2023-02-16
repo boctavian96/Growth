@@ -29,11 +29,11 @@ public class GraphicSystem extends IteratingSystem {
 
         batch.begin();
         for (var e : renderQueue) {
-            var pc = pm.get(e);
-            var gc = gm.get(e);
+            var positionComponent = pm.get(e);
+            var graphicComponent = gm.get(e);
 
-            gc.sprite.setPosition(pc.position.x, pc.position.y);
-            gc.sprite.draw(batch);
+            graphicComponent.sprite.setPosition(positionComponent.position.x, positionComponent.position.y);
+            graphicComponent.sprite.draw(batch);
         }
         batch.end();
     }

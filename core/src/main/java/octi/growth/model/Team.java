@@ -1,8 +1,10 @@
 package octi.growth.model;
 
 import com.badlogic.gdx.graphics.Color;
+import lombok.AllArgsConstructor;
 
-public enum Team{
+@AllArgsConstructor
+public enum Team {
     RED(Color.RED),
     GREEN(Color.GREEN),
     YELLOW(Color.YELLOW),
@@ -11,8 +13,4 @@ public enum Team{
     NEUTRAL(Color.GRAY);
 
     public final Color color;
-
-    Team(Color color){
-        this.color = color;
-    }
 }
