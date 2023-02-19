@@ -10,7 +10,8 @@ public class Constants {
     public static final String BACKGROUND = "images/background.png";
 
     //UI.
-    public static final String UI_SKIN = "ui/uiskin.json";
+    public static final String UI_SKIN = "ui/default/uiskin.json";
+    //public static final String UI_SKIN = "ui/star_soldier/star-soldier-ui.json";
 
     //Sounds.
     public static final String BACKGROUND_MUSIC = "sounds/BGmusic.mp3";
