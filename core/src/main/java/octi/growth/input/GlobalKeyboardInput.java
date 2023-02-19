@@ -10,12 +10,10 @@ import octi.growth.screen.ECSScreen;
 
 public class GlobalKeyboardInput implements InputProcessor {
     private final Growth game;
-    Array<Integer> keyCombination;
     IntSet keysDown;
 
     public GlobalKeyboardInput(Growth game) {
         this.game = game;
-        keyCombination = new Array<>(2);
         keysDown = new IntSet(3);
     }
 
