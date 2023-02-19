@@ -1,6 +1,7 @@
 package octi.growth.screen;
 
 import com.badlogic.ashley.core.PooledEngine;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import octi.growth.Growth;
 import octi.growth.ecs.system.GraphicSystem;
@@ -25,6 +26,8 @@ public class ECSScreen extends AbstractScreen {
 
         //Add here the entities;
         //engine.addEntity();
+
+        Gdx.input.setInputProcessor(inputMultiplexer);
     }
 
     @Override

@@ -53,7 +53,6 @@ public class MapEditorScreen extends AbstractScreen implements InputProcessor {
     public void show() {
         shapeRenderer = new ShapeRenderer();
 
-        InputMultiplexer inputMultiplexer = new InputMultiplexer();
         generatedCells = new ArrayList<>();
 
         uiStage = new Stage();

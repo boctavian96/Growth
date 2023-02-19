@@ -26,7 +26,6 @@ public class TutorialScreen extends AbstractScreen {
     @Override
     public void show() {
         super.show();
-        InputMultiplexer inputMultiplexer = new InputMultiplexer();
 
         tutorialStage = new Stage();
         Table t = new Table();
@@ -56,12 +55,12 @@ public class TutorialScreen extends AbstractScreen {
 
         tutorialMap.update(delta);
 
-        if(Gdx.input.isKeyPressed(Input.Keys.F5)){
+        if (Gdx.input.isKeyPressed(Input.Keys.F5)) {
             refresh();
         }
     }
 
-    public void refresh(){
+    public void refresh() {
         Gdx.app.log("REFRESH", "Refreshing the screen");
         dispose();
         show();

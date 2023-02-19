@@ -30,7 +30,8 @@ public class OptionsScreen extends AbstractScreen {
 
         preferences = Gdx.app.getPreferences(PREFERENCES);
 
-        Gdx.input.setInputProcessor(stage);
+        inputMultiplexer.addProcessor(stage);
+        Gdx.input.setInputProcessor(inputMultiplexer);
         Skin uiSkin = loadSkin();
 
         Slider musicSlider = new Slider(0f, 1f, 0.05f, false, uiSkin);

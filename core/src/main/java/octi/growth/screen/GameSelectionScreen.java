@@ -6,7 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import octi.growth.Growth;
 import octi.growth.ui.GamePreferencesWidget;
 
-public class GameSelectionScreen extends AbstractScreen{
+public class GameSelectionScreen extends AbstractScreen {
 
     private Stage uiStage;
 
@@ -31,7 +31,8 @@ public class GameSelectionScreen extends AbstractScreen{
 
         uiStage.addActor(table);
 
-        Gdx.input.setInputProcessor(uiStage);
+        inputMultiplexer.addProcessor(uiStage);
+        Gdx.input.setInputProcessor(inputMultiplexer);
     }
 
     @Override

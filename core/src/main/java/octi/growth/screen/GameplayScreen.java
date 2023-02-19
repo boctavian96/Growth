@@ -23,23 +23,18 @@ public class GameplayScreen extends AbstractScreen {
     private SpriteBatch spriteBatch;
     private GameMap map;
 
-    private final Stage uiStage;
-
-    private final InputMultiplexer inputMultiplexer;
+    private Stage uiStage;
 
     public GameplayScreen(Growth game, GameplayScreenContext context) {
         super(game);
         this.context = context;
-        this.uiStage = new Stage();
-
-        inputMultiplexer = new InputMultiplexer();
-        inputMultiplexer.addProcessor(uiStage);
     }
 
     @Override
     public void show() {
         // Prepare your screen here.
 
+        uiStage = new Stage();
         // Prepare Camera.
         int w = Gdx.graphics.getWidth();
         int h = Gdx.graphics.getHeight();
@@ -55,6 +50,7 @@ public class GameplayScreen extends AbstractScreen {
 
         //Prepare Map.
         map = new GameMap(game, context, uiStage);
+        inputMultiplexer.addProcessor(uiStage);
         inputMultiplexer.addProcessor(map);
         Gdx.input.setInputProcessor(inputMultiplexer);
 

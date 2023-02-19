@@ -6,6 +6,8 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.IntSet;
 import octi.growth.Growth;
+import octi.growth.command.DebugModeCommand;
+import octi.growth.command.RefreshCommand;
 import octi.growth.screen.ECSScreen;
 
 public class GlobalKeyboardInput implements InputProcessor {
@@ -35,6 +37,11 @@ public class GlobalKeyboardInput implements InputProcessor {
 
         if (keycode == Input.Keys.Q) {
             Gdx.app.exit();
+        }
+
+        if (keycode == Input.Keys.F5) {
+            Gdx.app.log("REFRESH", "Refreshing the screen");
+            new RefreshCommand(game).execute();
         }
 
         keysDown.remove(keycode);
@@ -73,7 +80,7 @@ public class GlobalKeyboardInput implements InputProcessor {
 
     private void handleKeyCombinations(int mostRecentKey) {
         if (keysDown.contains(Input.Keys.CONTROL_LEFT) && keysDown.contains(Input.Keys.D)) {
-            game.changeDebug();
+            new DebugModeCommand(game).execute();
             Gdx.app.log("DEBUG MODE: ", String.valueOf(game.isDebugMode()));
         }
 

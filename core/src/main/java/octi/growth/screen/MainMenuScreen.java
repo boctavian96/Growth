@@ -22,7 +22,6 @@ public class MainMenuScreen extends AbstractScreen {
 
     @Override
     public void show() {
-        InputMultiplexer inputMultiplexer = new InputMultiplexer();
 
         background = new Texture(Gdx.files.internal(Constants.BACKGROUND));
         Image img = new Image(background);
@@ -67,7 +66,6 @@ public class MainMenuScreen extends AbstractScreen {
         uiStage.addActor(table);
 
         inputMultiplexer.addProcessor(uiStage);
-        inputMultiplexer.addProcessor(new GlobalKeyboardInput(game));
         Gdx.input.setInputProcessor(inputMultiplexer);
     }
 
