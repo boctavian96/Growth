@@ -9,11 +9,9 @@ import octi.growth.screen.ECSScreen;
 
 public class GlobalKeyboardInput implements InputProcessor {
     private final Growth game;
-    private final Camera camera;
 
-    public GlobalKeyboardInput(Growth game, Camera camera) {
+    public GlobalKeyboardInput(Growth game) {
         this.game = game;
-        this.camera = camera;
     }
 
     @Override

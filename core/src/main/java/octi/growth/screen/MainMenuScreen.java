@@ -1,6 +1,7 @@
 package octi.growth.screen;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
@@ -8,6 +9,7 @@ import octi.growth.Constants;
 import octi.growth.Growth;
 import octi.growth.input.ChangeScreenEvent;
 import octi.growth.input.ExitEvent;
+import octi.growth.input.GlobalKeyboardInput;
 import octi.growth.platform.Platform;
 
 public class MainMenuScreen extends AbstractScreen {
@@ -20,6 +22,8 @@ public class MainMenuScreen extends AbstractScreen {
 
     @Override
     public void show() {
+        InputMultiplexer inputMultiplexer = new InputMultiplexer();
+
         background = new Texture(Gdx.files.internal(Constants.BACKGROUND));
         Image img = new Image(background);
 
@@ -62,7 +66,9 @@ public class MainMenuScreen extends AbstractScreen {
 
         uiStage.addActor(table);
 
-        Gdx.input.setInputProcessor(uiStage);
+        inputMultiplexer.addProcessor(uiStage);
+        inputMultiplexer.addProcessor(new GlobalKeyboardInput(game));
+        Gdx.input.setInputProcessor(inputMultiplexer);
     }
 
     @Override

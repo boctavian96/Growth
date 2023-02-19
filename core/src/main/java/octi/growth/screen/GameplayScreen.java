@@ -12,7 +12,9 @@ import octi.growth.Growth;
 import octi.growth.input.GlobalKeyboardInput;
 import octi.growth.model.GameMap;
 
-/** First screen of the application. Displayed after the application is created. */
+/**
+ * First screen of the application. Displayed after the application is created.
+ */
 public class GameplayScreen extends AbstractScreen {
     private final GameplayScreenContext context;
 
@@ -25,7 +27,7 @@ public class GameplayScreen extends AbstractScreen {
 
     private final InputMultiplexer inputMultiplexer;
 
-    public GameplayScreen(Growth game, GameplayScreenContext context){
+    public GameplayScreen(Growth game, GameplayScreenContext context) {
         super(game);
         this.context = context;
         this.uiStage = new Stage();
@@ -42,10 +44,10 @@ public class GameplayScreen extends AbstractScreen {
         int w = Gdx.graphics.getWidth();
         int h = Gdx.graphics.getHeight();
         camera = new OrthographicCamera(w, h);
-        camera.position.set(w/2, h/2, 0);
+        camera.position.set(w / 2, h / 2, 0);
         camera.update();
         FitViewport fitViewport = new FitViewport(w, h);
-        inputMultiplexer.addProcessor(new GlobalKeyboardInput(game, camera));
+        inputMultiplexer.addProcessor(new GlobalKeyboardInput(game));
 
         // Prepare Drawers.
         shapeRenderer = new ShapeRenderer();
