@@ -5,6 +5,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.Camera;
 import octi.growth.Growth;
+import octi.growth.screen.ECSScreen;
 
 public class GlobalKeyboardInput implements InputProcessor {
     private final Growth game;
@@ -24,6 +25,10 @@ public class GlobalKeyboardInput implements InputProcessor {
     public boolean keyUp(int keycode) {
         if (keycode == Input.Keys.Q) {
             Gdx.app.exit();
+        }
+
+        if (keycode == Input.Keys.P) {
+            game.setScreen(new ECSScreen(game));
         }
         return false;
     }
